@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mljr.gps.mapper.AppInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.mljr.gps.entity.AppInfo" >
+    <id column="APP_NO" property="appNo" jdbcType="INTEGER" />
+    <result column="APP_CODE" property="appCode" jdbcType="VARCHAR" />
+    <result column="PROPPSER_ID" property="proppserId" jdbcType="INTEGER" />
+    <result column="CAR_ID" property="carId" jdbcType="INTEGER" />
+    <result column="DEALER_CODE" property="dealerCode" jdbcType="INTEGER" />
+    <result column="DEALER_NAME" property="dealerName" jdbcType="VARCHAR" />
+    <result column="COMPANY_NAME" property="companyName" jdbcType="VARCHAR" />
+    <result column="IS_OLD" property="isOld" jdbcType="CHAR" />
+    <result column="IS_LCV" property="isLcv" jdbcType="CHAR" />
+    <result column="SALE_PRICE" property="salePrice" jdbcType="DECIMAL" />
+    <result column="IS_GPS" property="isGps" jdbcType="CHAR" />
+    <result column="GPS_FEE" property="gpsFee" jdbcType="DECIMAL" />
+    <result column="IS_GPS_LOAN" property="isGpsLoan" jdbcType="CHAR" />
+    <result column="A_CARLOAN_AMOUNT" property="aCarloanAmount" jdbcType="DECIMAL" />
+    <result column="A_LOAN_AMOUNT" property="aLoanAmount" jdbcType="DECIMAL" />
+    <result column="A_INIT_PAYMENT" property="aInitPayment" jdbcType="DECIMAL" />
+    <result column="A_INIT_SCALE" property="aInitScale" jdbcType="DECIMAL" />
+    <result column="A_LOAN_PERIODS" property="aLoanPeriods" jdbcType="TINYINT" />
+    <result column="A_LOAN_RATE" property="aLoanRate" jdbcType="DECIMAL" />
+    <result column="LOAN_RECORD" property="loanRecord" jdbcType="CHAR" />
+    <result column="APP_SCORE" property="appScore" jdbcType="DECIMAL" />
+    <result column="R_LOAN_AMOUNT" property="rLoanAmount" jdbcType="DECIMAL" />
+    <result column="R_INIT_PAYMENT" property="rInitPayment" jdbcType="DECIMAL" />
+    <result column="R_INIT_SCALE" property="rInitScale" jdbcType="DECIMAL" />
+    <result column="R_LOAN_PERIODS" property="rLoanPeriods" jdbcType="TINYINT" />
+    <result column="R_LOAN_RATE" property="rLoanRate" jdbcType="DECIMAL" />
+    <result column="REP_ACCOUNT_BANK" property="repAccountBank" jdbcType="VARCHAR" />
+    <result column="REP_ACCOUNT_NO" property="repAccountNo" jdbcType="VARCHAR" />
+    <result column="REP_ACCOUNT_NAME" property="repAccountName" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="APP_TIME" property="appTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="LOANER_APPROVAL_TIME" property="loanerApprovalTime" jdbcType="TIMESTAMP" />
+    <result column="MANAGE_APPROVAL_TIME" property="manageApprovalTime" jdbcType="TIMESTAMP" />
+    <result column="BLOAN_DATA_TIME" property="bloanDataTime" jdbcType="TIMESTAMP" />
+    <result column="BLOAN_APPROVAL_TIME" property="bloanApprovalTime" jdbcType="TIMESTAMP" />
+    <result column="ALOAN_DATA_TIME" property="aloanDataTime" jdbcType="TIMESTAMP" />
+    <result column="ALOAN_APPROVAL_TIME" property="aloanApprovalTime" jdbcType="TIMESTAMP" />
+    <result column="LOAN_TIME" property="loanTime" jdbcType="TIMESTAMP" />
+    <result column="ALOAN_ARRIVE" property="aloanArrive" jdbcType="VARCHAR" />
+    <result column="CANCEL_TYPE" property="cancelType" jdbcType="CHAR" />
+    <result column="CANCEL_REASON" property="cancelReason" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="CHAR" />
+    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+    <result column="IS_ASSURE" property="isAssure" jdbcType="CHAR" />
+    <result column="COMPANY_CODE" property="companyCode" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="FLOW_SEQ" property="flowSeq" jdbcType="INTEGER" />
+    <result column="IS_DEFER_MORTGAGE" property="isDeferMortgage" jdbcType="VARCHAR" />
+    <result column="PRODUCT_CODE" property="productCode" jdbcType="INTEGER" />
+    <result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
+    <result column="R_GPS_FEE" property="rGpsFee" jdbcType="DECIMAL" />
+    <result column="A_SECURE_FEE" property="aSecureFee" jdbcType="DECIMAL" />
+    <result column="R_SECURE_FEE" property="rSecureFee" jdbcType="DECIMAL" />
+    <result column="IS_PRINT_W" property="isPrintW" jdbcType="CHAR" />
+    <result column="IS_HOUSE" property="isHouse" jdbcType="CHAR" />
+    <result column="LOAN_REMARKS" property="loanRemarks" jdbcType="VARCHAR" />
+    <result column="BLOAN_REMARKS" property="bloanRemarks" jdbcType="VARCHAR" />
+    <result column="SYSA_REMARKS" property="sysaRemarks" jdbcType="VARCHAR" />
+    <result column="YY_RISK_REMARKS" property="yyRiskRemarks" jdbcType="VARCHAR" />
+    <result column="YY_PRE_RISK_REMARKS" property="yyPreRiskRemarks" jdbcType="VARCHAR" />
+    <result column="SYSA_DATE" property="sysaDate" jdbcType="TIMESTAMP" />
+    <result column="SYSA_STATUS" property="sysaStatus" jdbcType="CHAR" />
+    <result column="SYSA_RESULT" property="sysaResult" jdbcType="CHAR" />
+    <result column="REFUSE_STATUS" property="refuseStatus" jdbcType="CHAR" />
+    <result column="IS_PREPAY" property="isPrepay" jdbcType="CHAR" />
+    <result column="PREPAY_DATE" property="prepayDate" jdbcType="TIMESTAMP" />
+    <result column="EXTRA_LOAN_AMOUNT" property="extraLoanAmount" jdbcType="DECIMAL" />
+    <result column="PAYMENT_CH" property="paymentCh" jdbcType="VARCHAR" />
+    <result column="DATE_CH" property="dateCh" jdbcType="TIMESTAMP" />
+    <result column="payment_ch_zn" property="paymentChZn" jdbcType="VARCHAR" />
+    <result column="discount_e" property="discountE" jdbcType="DECIMAL" />
+    <result column="disa_rate" property="disaRate" jdbcType="DECIMAL" />
+    <result column="discount_true_e" property="discountTrueE" jdbcType="DECIMAL" />
+    <result column="r_discount_true_e" property="rDiscountTrueE" jdbcType="DECIMAL" />
+    <result column="FY_REMARKS" property="fyRemarks" jdbcType="VARCHAR" />
+    <result column="loan_status" property="loanStatus" jdbcType="VARCHAR" />
+    <result column="IS_CREDIT_REPORT" property="isCreditReport" jdbcType="CHAR" />
+    <result column="MODEL_IDS" property="modelIds" jdbcType="VARCHAR" />
+    <result column="A_COM_RATE" property="aComRate" jdbcType="DECIMAL" />
+    <result column="A_COM_FEE" property="aComFee" jdbcType="DECIMAL" />
+    <result column="A_YANBAO_FEE" property="aYanbaoFee" jdbcType="DECIMAL" />
+    <result column="A_YANBAO_FEE_3" property="aYanbaoFee3" jdbcType="DECIMAL" />
+    <result column="A_YANBAO_TC" property="aYanbaoTc" jdbcType="INTEGER" />
+    <result column="A_YANBAO_TC_3" property="aYanbaoTc3" jdbcType="INTEGER" />
+    <result column="A_YANBAO_TC_NAME" property="aYanbaoTcName" jdbcType="VARCHAR" />
+    <result column="A_YANBAO_TC_NAME_3" property="aYanbaoTcName3" jdbcType="VARCHAR" />
+    <result column="A_LIFE_INSURANCE" property="aLifeInsurance" jdbcType="DECIMAL" />
+    <result column="R_LIFE_INSURANCE" property="rLifeInsurance" jdbcType="DECIMAL" />
+    <result column="LIFE_INSURANCE_RULE" property="lifeInsuranceRule" jdbcType="VARCHAR" />
+    <result column="LIFE_INSURANCE_RATE" property="lifeInsuranceRate" jdbcType="DECIMAL" />
+    <result column="R_COM_FEE" property="rComFee" jdbcType="DECIMAL" />
+    <result column="R_YANBAO_FEE" property="rYanbaoFee" jdbcType="DECIMAL" />
+    <result column="R_YANBAO_FEE_3" property="rYanbaoFee3" jdbcType="DECIMAL" />
+    <result column="CH_APPROVAL_STATUS" property="chApprovalStatus" jdbcType="VARCHAR" />
+    <result column="PLED_MODEL_ID" property="pledModelId" jdbcType="VARCHAR" />
+    <result column="AUTH_CH" property="authCh" jdbcType="VARCHAR" />
+    <result column="payment_ch_en" property="paymentChEn" jdbcType="VARCHAR" />
+    <result column="FILE_NUMBER" property="fileNumber" jdbcType="VARCHAR" />
+    <result column="POST_LOAN_STATUS" property="postLoanStatus" jdbcType="CHAR" />
+    <result column="LOAN_AFTER_REMARKS" property="loanAfterRemarks" jdbcType="VARCHAR" />
+    <result column="LOAN_AFTER_CONDITION" property="loanAfterCondition" jdbcType="VARCHAR" />
+    <result column="IS_CREDIT" property="isCredit" jdbcType="CHAR" />
+    <result column="RATE_LEVEL" property="rateLevel" jdbcType="VARCHAR" />
+    <result column="R_RATE_LEVEL" property="rRateLevel" jdbcType="VARCHAR" />
+    <result column="ACCOUNT_FEE" property="accountFee" jdbcType="DECIMAL" />
+    <result column="R_ACCOUNT_FEE" property="rAccountFee" jdbcType="DECIMAL" />
+    <result column="R_CARLOAN_AMOUNT" property="rCarloanAmount" jdbcType="DECIMAL" />
+    <result column="LOAN_FILE_STATUS" property="loanFileStatus" jdbcType="VARCHAR" />
+    <result column="BELONG_DEALER" property="belongDealer" jdbcType="VARCHAR" />
+    <result column="BELONG_SALE" property="belongSale" jdbcType="VARCHAR" />
+    <result column="BELONG_SALE_MANAGER" property="belongSaleManager" jdbcType="VARCHAR" />
+    <result column="BELONG_OPERATION" property="belongOperation" jdbcType="VARCHAR" />
+    <result column="BELONG_MARKET" property="belongMarket" jdbcType="VARCHAR" />
+    <result column="REP_ACCOUNT_IDNO" property="repAccountIdno" jdbcType="VARCHAR" />
+    <result column="IS_CHECK_ACCOUNT" property="isCheckAccount" jdbcType="CHAR" />
+    <result column="GPS_LEVEL" property="gpsLevel" jdbcType="VARCHAR" />
+    <result column="GPS_CONFIRM_DATE" property="gpsConfirmDate" jdbcType="TIMESTAMP" />
+    <result column="GPS_REBATE" property="gpsRebate" jdbcType="DECIMAL" />
+    <result column="SER_FIN_REBATE" property="serFinRebate" jdbcType="DECIMAL" />
+    <result column="come_from" property="comeFrom" jdbcType="CHAR" />
+    <result column="BELONG_SALE_TEL" property="belongSaleTel" jdbcType="VARCHAR" />
+    <result column="IS_PRE_INTEREST" property="isPreInterest" jdbcType="CHAR" />
+    <result column="R_GROSS_INTEREST" property="rGrossInterest" jdbcType="DECIMAL" />
+    <result column="GROSS_INTEREST" property="grossInterest" jdbcType="DECIMAL" />
+    <result column="EXTEND_COST" property="extendCost" jdbcType="DECIMAL" />
+    <result column="R_EXTEND_COST" property="rExtendCost" jdbcType="DECIMAL" />
+    <result column="EXTEND_ID" property="extendId" jdbcType="VARCHAR" />
+    <result column="EXTEND_NAME" property="extendName" jdbcType="VARCHAR" />
+    <result column="PRE_LOAN_RATE" property="preLoanRate" jdbcType="DECIMAL" />
+    <result column="AUTO_APPR" property="autoAppr" jdbcType="VARCHAR" />
+    <result column="AUTO_APPR_TIME" property="autoApprTime" jdbcType="TIMESTAMP" />
+    <result column="first_submit" property="firstSubmit" jdbcType="TIMESTAMP" />
+    <result column="WORKFLOW_QUEUE" property="workflowQueue" jdbcType="VARCHAR" />
+    <result column="BATCH_PAY_FLAG" property="batchPayFlag" jdbcType="VARCHAR" />
+    <result column="SEND_APPR" property="sendAppr" jdbcType="VARCHAR" />
+    <result column="YY_APPROVAL_RESULT" property="yyApprovalResult" jdbcType="VARCHAR" />
+    <result column="IS_CERT_ALL" property="isCertAll" jdbcType="CHAR" />
+    <result column="is_auth_yh" property="isAuthYh" jdbcType="CHAR" />
+    <result column="loan_after_yuan_remarks" property="loanAfterYuanRemarks" jdbcType="VARCHAR" />
+    <result column="IS_VIP_CONTRACT" property="isVipContract" jdbcType="CHAR" />
+    <result column="is_quick_audit" property="isQuickAudit" jdbcType="TINYINT" />
+    <result column="assign" property="assign" jdbcType="CHAR" />
+    <result column="REP_ACCOUNT_MOBILE" property="repAccountMobile" jdbcType="VARCHAR" />
+    <result column="IS_BACK" property="isBack" jdbcType="BIT" />
+    <result column="is_end_ht" property="isEndHt" jdbcType="BIT" />
+    <result column="ht_source" property="htSource" jdbcType="BIT" />
+    <result column="is_end_contract" property="isEndContract" jdbcType="BIT" />
+    <result column="is_company_license" property="isCompanyLicense" jdbcType="BIT" />
+    <result column="ICBC_ASSESSMENT_PRICES" property="icbcAssessmentPrices" jdbcType="DECIMAL" />
+    <result column="NOTARIZATION_FEE" property="notarizationFee" jdbcType="DECIMAL" />
+    <result column="quick_audit_sign" property="quickAuditSign" jdbcType="BIT" />
+    <result column="rep_account_line_num" property="repAccountLineNum" jdbcType="VARCHAR" />
+    <result column="rep_account_check_ways" property="repAccountCheckWays" jdbcType="CHAR" />
+    <result column="r_business_insurance" property="rBusinessInsurance" jdbcType="DECIMAL" />
+    <result column="r_traffic_insurance" property="rTrafficInsurance" jdbcType="DECIMAL" />
+    <result column="r_tax_price" property="rTaxPrice" jdbcType="DECIMAL" />
+    <result column="webankNo" property="webankno" jdbcType="VARCHAR" />
+    <result column="belong_sub_sale" property="belongSubSale" jdbcType="VARCHAR" />
+    <result column="shift_file_number" property="shiftFileNumber" jdbcType="VARCHAR" />
+    <result column="pufa_back_type" property="pufaBackType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    APP_NO, APP_CODE, PROPPSER_ID, CAR_ID, DEALER_CODE, DEALER_NAME, COMPANY_NAME, IS_OLD, 
+    IS_LCV, SALE_PRICE, IS_GPS, GPS_FEE, IS_GPS_LOAN, A_CARLOAN_AMOUNT, A_LOAN_AMOUNT, 
+    A_INIT_PAYMENT, A_INIT_SCALE, A_LOAN_PERIODS, A_LOAN_RATE, LOAN_RECORD, APP_SCORE, 
+    R_LOAN_AMOUNT, R_INIT_PAYMENT, R_INIT_SCALE, R_LOAN_PERIODS, R_LOAN_RATE, REP_ACCOUNT_BANK, 
+    REP_ACCOUNT_NO, REP_ACCOUNT_NAME, CREATE_TIME, APP_TIME, UPDATE_TIME, LOANER_APPROVAL_TIME, 
+    MANAGE_APPROVAL_TIME, BLOAN_DATA_TIME, BLOAN_APPROVAL_TIME, ALOAN_DATA_TIME, ALOAN_APPROVAL_TIME, 
+    LOAN_TIME, ALOAN_ARRIVE, CANCEL_TYPE, CANCEL_REASON, STATUS, REMARKS, IS_ASSURE, 
+    COMPANY_CODE, user_id, user_name, FLOW_SEQ, IS_DEFER_MORTGAGE, PRODUCT_CODE, PRODUCT_NAME, 
+    R_GPS_FEE, A_SECURE_FEE, R_SECURE_FEE, IS_PRINT_W, IS_HOUSE, LOAN_REMARKS, BLOAN_REMARKS, 
+    SYSA_REMARKS, YY_RISK_REMARKS, YY_PRE_RISK_REMARKS, SYSA_DATE, SYSA_STATUS, SYSA_RESULT, 
+    REFUSE_STATUS, IS_PREPAY, PREPAY_DATE, EXTRA_LOAN_AMOUNT, PAYMENT_CH, DATE_CH, payment_ch_zn, 
+    discount_e, disa_rate, discount_true_e, r_discount_true_e, FY_REMARKS, loan_status, 
+    IS_CREDIT_REPORT, MODEL_IDS, A_COM_RATE, A_COM_FEE, A_YANBAO_FEE, A_YANBAO_FEE_3, 
+    A_YANBAO_TC, A_YANBAO_TC_3, A_YANBAO_TC_NAME, A_YANBAO_TC_NAME_3, A_LIFE_INSURANCE, 
+    R_LIFE_INSURANCE, LIFE_INSURANCE_RULE, LIFE_INSURANCE_RATE, R_COM_FEE, R_YANBAO_FEE, 
+    R_YANBAO_FEE_3, CH_APPROVAL_STATUS, PLED_MODEL_ID, AUTH_CH, payment_ch_en, FILE_NUMBER, 
+    POST_LOAN_STATUS, LOAN_AFTER_REMARKS, LOAN_AFTER_CONDITION, IS_CREDIT, RATE_LEVEL, 
+    R_RATE_LEVEL, ACCOUNT_FEE, R_ACCOUNT_FEE, R_CARLOAN_AMOUNT, LOAN_FILE_STATUS, BELONG_DEALER, 
+    BELONG_SALE, BELONG_SALE_MANAGER, BELONG_OPERATION, BELONG_MARKET, REP_ACCOUNT_IDNO, 
+    IS_CHECK_ACCOUNT, GPS_LEVEL, GPS_CONFIRM_DATE, GPS_REBATE, SER_FIN_REBATE, come_from, 
+    BELONG_SALE_TEL, IS_PRE_INTEREST, R_GROSS_INTEREST, GROSS_INTEREST, EXTEND_COST, 
+    R_EXTEND_COST, EXTEND_ID, EXTEND_NAME, PRE_LOAN_RATE, AUTO_APPR, AUTO_APPR_TIME, 
+    first_submit, WORKFLOW_QUEUE, BATCH_PAY_FLAG, SEND_APPR, YY_APPROVAL_RESULT, IS_CERT_ALL, 
+    is_auth_yh, loan_after_yuan_remarks, IS_VIP_CONTRACT, is_quick_audit, assign, REP_ACCOUNT_MOBILE, 
+    IS_BACK, is_end_ht, ht_source, is_end_contract, is_company_license, ICBC_ASSESSMENT_PRICES, 
+    NOTARIZATION_FEE, quick_audit_sign, rep_account_line_num, rep_account_check_ways, 
+    r_business_insurance, r_traffic_insurance, r_tax_price, webankNo, belong_sub_sale, 
+    shift_file_number, pufa_back_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ca_app_info
+    where APP_NO = #{appNo,jdbcType=INTEGER}
+  </select>
+
+  <select id="queryAppInfoByAppCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from ca_app_info
+    where APP_CODE = #{appCode,jdbcType=INTEGER}
+  </select>
+
+  <!-- 用于更新贷款GPS审批状态 -->
+  <update id="updateForCarGps" parameterType="com.mljr.gps.entity.AppInfo" >
+    update ca_app_info set is_gps = #{isGps},GPS_CONFIRM_DATE = #{gpsConfirmDate,jdbcType=TIMESTAMP} where APP_CODE = #{appCode}
+  </update>
+
+  <select id="queryAppInfoByAppCodeList" resultMap="BaseResultMap" parameterType="java.util.List" >
+    select
+    <include refid="Base_Column_List" />
+    from ca_app_info
+    WHERE
+    APP_CODE in
+    <foreach collection="appCodeList" item="appCode" open="(" separator="," close=")">
+      #{appCode}
+    </foreach>
+  </select>
+
+</mapper>

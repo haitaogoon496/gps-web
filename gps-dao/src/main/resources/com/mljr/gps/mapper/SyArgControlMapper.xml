@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mljr.gps.mapper.SyArgControlMapper">
+  <resultMap id="BaseResultMap" type="com.mljr.gps.entity.SyArgControl">
+    <id column="r_id" jdbcType="INTEGER" property="rId" />
+    <result column="con_arg_name" jdbcType="VARCHAR" property="conArgName" />
+    <result column="con_arg_code" jdbcType="VARCHAR" property="conArgCode" />
+    <result column="con_arg_status" jdbcType="INTEGER" property="conArgStatus" />
+    <result column="con_arg_value" jdbcType="VARCHAR" property="conArgValue" />
+    <result column="con_arg_type" jdbcType="INTEGER" property="conArgType" />
+    <result column="con_arg_startdate" jdbcType="TIMESTAMP" property="conArgStartdate" />
+    <result column="con_arg_stopdate" jdbcType="TIMESTAMP" property="conArgStopdate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    r_id, con_arg_name, con_arg_code, con_arg_status, con_arg_value, con_arg_type, con_arg_startdate, 
+    con_arg_stopdate
+  </sql>
+
+  <select id="queryList" parameterType="SyArgControlForm" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sy_arg_control
+    where con_arg_status = 1 and  con_arg_type = #{conArgType}
+  </select>
+
+
+</mapper>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mljr.gps.mapper.CarGpsMapper" >
+  <resultMap id="BaseResultMap" type="com.mljr.gps.entity.CarGps" >
+    <id column="tid" property="tid" jdbcType="INTEGER" />
+    <result column="app_code" property="appCode" jdbcType="VARCHAR" />
+    <result column="car_id" property="carId" jdbcType="INTEGER" />
+    <result column="GPS_DEALER" property="gpsDealer" jdbcType="VARCHAR" />
+    <result column="GPS_NO" property="gpsNo" jdbcType="VARCHAR" />
+    <result column="gps_position" property="gpsPosition" jdbcType="VARCHAR" />
+    <result column="GPS_INSTALL_WAY" property="gpsInstallWay" jdbcType="INTEGER" />
+    <result column="manual_audit_code" property="manualAuditCode" jdbcType="VARCHAR" />
+    <result column="manual_audit_result" property="manualAuditResult" jdbcType="VARCHAR" />
+    <result column="audit_supplement" property="auditSupplement" jdbcType="VARCHAR" />
+    <result column="auto_audit_code" property="autoAuditCode" jdbcType="VARCHAR" />
+    <result column="auto_audit_result" property="autoAuditResult" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="del_status" property="delStatus" jdbcType="INTEGER" />
+    <result column="history_id" property="historyId" jdbcType="INTEGER" />
+    <result column="is_back" property="isBack" jdbcType="TINYINT" />
+    <result column="is_current" property="isCurrent" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tid, app_code, car_id, GPS_DEALER, GPS_NO,gps_position, GPS_INSTALL_WAY, manual_audit_code, manual_audit_result,
+    audit_supplement, auto_audit_code, auto_audit_result, status, del_status, history_id, 
+    is_back, is_current, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ca_car_gps
+    where tid = #{tid,jdbcType=INTEGER}
+  </select>
+
+  <sql id="queryCondition">
+    <where>
+      g.del_status = 1
+      <if test="form != null " >
+        <if test="form.appCode != null and form.appCode !='' ">
+          and app_code=#{form.appCode}
+        </if>
+        <if test="form.appCode != historyId ">
+          and history_id=#{form.historyId}
+        </if>
+        <if test="form.appCode != null">
+          and app_code in
+          <foreach collection="form.appCode" item="item" index="index" open="(" close=")" separator=",">
+          #{item}
+          </foreach>
+        </if>
+      </if>
+    </where>
+  </sql>
+
+  <select id="pageQuery" resultMap="BaseResultMap" parameterType="com.lyqc.base.page.PageForm">
+    select
+    <include refid="Base_Column_List" />
+    from ca_car_gps g
+    <include refid="queryCondition"/>
+    <if test="paging == true">
+      limit #{limit} offset #{start}
+    </if>
+  </select>
+
+  <sql id="queryListCondition">
+    <where>
+      <if test="historyId == null or historyId ==0 ">
+        g.del_status = 1
+      </if>
+
+      <if test="appCode != null and appCode !='' ">
+        and app_code=#{appCode}
+      </if>
+      <if test="historyId != null and historyId !=''and historyId !=0 ">
+        and history_id=#{historyId}
+      </if>
+
+      <if test="appCodeScope != null">
+        and app_code in
+        <foreach collection="appCodeScope" item="item" index="index" open="(" close=")" separator=",">
+          #{item}
+        </foreach>
+      </if>
+    </where>
+  </sql>
+
+  <select id="queryList" resultMap="BaseResultMap" parameterType="com.mljr.gps.form.CarGpsForm">
+    select
+    <include refid="Base_Column_List" />
+    from ca_car_gps g
+    <include refid="queryListCondition"/>
+  </select>
+
+  <select id="queryCount" resultType="int" parameterType="com.lyqc.base.page.PageForm">
+    select COUNT(1) from ca_car_gps g
+    <include refid="queryCondition"/>
+  </select>
+  <!-- 根据GPS设备号,去ca_car_gps表，查询相关单据号，只筛选 未删除、人工审核通过的单据号 -->
+  <select id="queryAppCodesByGpsNoForCaCarGps" resultType="java.lang.String" parameterType="java.lang.String">
+      <![CDATA[
+			SELECT
+				a.app_code
+			FROM
+				ca_car_gps a
+			WHERE
+				a.GPS_NO IS NOT NULL
+				AND a.del_status = 1
+				AND a.manual_audit_code = 1
+				AND a.GPS_NO = #{gpsNo}
+		    UNION
+			SELECT
+				a.app_code
+			FROM
+				ca_car_gps a
+			WHERE
+				a.GPS_NO IS NOT NULL
+				AND a.manual_audit_code = 1
+				AND a.GPS_NO = #{gpsNo}
+				AND a.create_time > date_format( now( ), '%Y-%m-%d 00:00:00' )
+      ]]>
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ca_car_gps
+    where tid = #{tid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mljr.gps.entity.CarGps" >
+    insert into ca_car_gps (tid, app_code, car_id, 
+      GPS_DEALER, GPS_NO,gps_position, GPS_INSTALL_WAY,
+      manual_audit_code, manual_audit_result, audit_supplement, 
+      auto_audit_code, auto_audit_result, status, 
+      del_status, history_id, is_back, 
+      is_current, create_time, update_time
+      )
+    values (#{tid,jdbcType=INTEGER}, #{appCode,jdbcType=VARCHAR}, #{carId,jdbcType=INTEGER}, 
+      #{gpsDealer,jdbcType=VARCHAR}, #{gpsNo,jdbcType=VARCHAR}, #{gpsPosition,jdbcType=VARCHAR}, #{gpsInstallWay,jdbcType=INTEGER},
+      #{manualAuditCode,jdbcType=VARCHAR}, #{manualAuditResult,jdbcType=VARCHAR}, #{auditSupplement,jdbcType=VARCHAR}, 
+      #{autoAuditCode,jdbcType=VARCHAR}, #{autoAuditResult,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{delStatus,jdbcType=INTEGER}, #{historyId,jdbcType=INTEGER}, #{isBack,jdbcType=TINYINT}, 
+      #{isCurrent,jdbcType=TINYINT}, CURRENT_TIMESTAMP , #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.mljr.gps.entity.CarGps" >
+    update ca_car_gps
+    set app_code = #{appCode,jdbcType=VARCHAR},
+      car_id = #{carId,jdbcType=INTEGER},
+      GPS_DEALER = #{gpsDealer,jdbcType=VARCHAR},
+      GPS_NO = #{gpsNo,jdbcType=VARCHAR},
+      gps_position = #{gpsPosition,jdbcType=VARCHAR},
+      GPS_INSTALL_WAY = #{gpsInstallWay,jdbcType=INTEGER},
+      manual_audit_code = #{manualAuditCode,jdbcType=VARCHAR},
+      manual_audit_result = #{manualAuditResult,jdbcType=VARCHAR},
+      audit_supplement = #{auditSupplement,jdbcType=VARCHAR},
+      auto_audit_code = #{autoAuditCode,jdbcType=VARCHAR},
+      auto_audit_result = #{autoAuditResult,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      del_status = #{delStatus,jdbcType=INTEGER},
+      history_id = #{historyId,jdbcType=INTEGER},
+      is_back = #{isBack,jdbcType=TINYINT},
+      is_current = #{isCurrent,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where tid = #{tid,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.mljr.gps.entity.CarGps" >
+    update ca_car_gps
+    <set >
+      <if test="appCode != null" >
+        app_code = #{appCode,jdbcType=VARCHAR},
+      </if>
+      <if test="carId != null" >
+        car_id = #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="gpsDealer != null" >
+        GPS_DEALER = #{gpsDealer,jdbcType=VARCHAR},
+      </if>
+      <if test="gpsNo != null" >
+        GPS_NO = #{gpsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="gpsInstallWay != null" >
+        GPS_INSTALL_WAY = #{gpsInstallWay,jdbcType=INTEGER},
+      </if>
+      <if test="manualAuditCode != null" >
+        manual_audit_code = #{manualAuditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="manualAuditResult != null" >
+        manual_audit_result = #{manualAuditResult,jdbcType=VARCHAR},
+      </if>
+      <if test="auditSupplement != null" >
+        audit_supplement = #{auditSupplement,jdbcType=VARCHAR},
+      </if>
+      <if test="autoAuditCode != null" >
+        auto_audit_code = #{autoAuditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="autoAuditResult != null" >
+        auto_audit_result = #{autoAuditResult,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="delStatus != null" >
+        del_status = #{delStatus,jdbcType=INTEGER},
+      </if>
+      <if test="historyId != null" >
+        history_id = #{historyId,jdbcType=INTEGER},
+      </if>
+      <if test="isBack != null" >
+        is_back = #{isBack,jdbcType=TINYINT},
+      </if>
+      <if test="isCurrent != null" >
+        is_current = #{isCurrent,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tid = #{tid,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateStatusByAppCode" parameterType="com.mljr.gps.form.CarGpsForm" >
+    update ca_car_gps set status = #{newStatus,jdbcType=INTEGER}
+    where app_code = #{appCode,jdbcType=VARCHAR} and status = #{status,jdbcType=INTEGER}
+  </update>
+
+  <!-- 按照订单号逻辑删除操作 -->
+  <update id="deleteByLogical" parameterType="java.lang.String" >
+    update ca_car_gps set del_status = 0 where app_code = #{appCode}
+  </update>
+
+  <!-- 根据appCode和ids，更新相关记录的isBack=0 -->
+  <update id="updateIsBack0" parameterType="java.lang.String" >
+    update ca_car_gps set is_back = 0 where app_code = #{appCode}
+  </update>
+
+  <!-- 根据appCode和ids，更新相关记录的isCurrent=0 -->
+  <update id="updateIsCurrent0" parameterType="java.lang.String" >
+    update ca_car_gps set is_current = 0 where app_code = #{appCode}
+  </update>
+
+  <!-- 根据appCode 查询当前退回原因项，用于显示退回原因（显示人工审核原因+补充内容） -->
+  <select id="queryListForBackReasonView" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM ca_car_gps WHERE app_code = #{appCode}  AND history_id = #{historyId} AND is_back = 1
+  </select>
+
+  <!-- 根据appCode和historyId查询isBack=1的记录，用于显示退回原因（显示人工审核原因+补充内容） -->
+  <select id="queryListForCurrentBack" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM ca_car_gps WHERE app_code = #{appCode}  AND is_back = 1 AND is_current = 1
+  </select>
+</mapper>

@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mljr.gps.mapper.GpsFlowMapper" >
+  <resultMap id="BaseResultMap" type="com.mljr.gps.entity.GpsFlow" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="app_code" property="appCode" jdbcType="VARCHAR" />
+    <result column="submit_time" property="submitTime" jdbcType="TIMESTAMP" />
+    <result column="submit_user_id" property="submitUserId" jdbcType="INTEGER" />
+    <result column="submit_user_name" property="submitUserName" jdbcType="VARCHAR" />
+    <result column="flow_step" property="flowStep" jdbcType="TINYINT" />
+    <result column="flow_status" property="flowStatus" jdbcType="TINYINT" />
+    <result column="approval_time" property="approvalTime" jdbcType="TIMESTAMP" />
+    <result column="approval_user_id" property="approvalUserId" jdbcType="INTEGER" />
+    <result column="approval_user_name" property="approvalUserName" jdbcType="VARCHAR" />
+    <result column="approval_idea" property="approvalIdea" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="violation_situation" property="violationSituation" jdbcType="INTEGER" />
+    <result column="violation_type" property="violationType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, app_code, submit_time, submit_user_id, submit_user_name, flow_step, flow_status, 
+    approval_time, approval_user_id, approval_user_name, approval_idea, remark,violation_situation,violation_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ca_gps_flow
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ca_gps_flow
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mljr.gps.entity.GpsFlow" >
+    insert into ca_gps_flow (id, app_code, submit_time, 
+      submit_user_id, submit_user_name, flow_step, 
+      flow_status, approval_time, approval_user_id, 
+      approval_user_name, approval_idea, remark
+      )
+    values (#{id,jdbcType=INTEGER}, #{appCode,jdbcType=VARCHAR}, #{submitTime,jdbcType=TIMESTAMP}, 
+      #{submitUserId,jdbcType=INTEGER}, #{submitUserName,jdbcType=VARCHAR}, #{flowStep,jdbcType=TINYINT}, 
+      #{flowStatus,jdbcType=TINYINT}, #{approvalTime,jdbcType=TIMESTAMP}, #{approvalUserId,jdbcType=INTEGER}, 
+      #{approvalUserName,jdbcType=VARCHAR}, #{approvalIdea,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mljr.gps.entity.GpsFlow" >
+    insert ignore into ca_gps_flow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="appCode != null" >
+        app_code,
+      </if>
+      <if test="submitTime != null" >
+        submit_time,
+      </if>
+      <if test="submitUserId != null" >
+        submit_user_id,
+      </if>
+      <if test="submitUserName != null" >
+        submit_user_name,
+      </if>
+      <if test="flowStep != null" >
+        flow_step,
+      </if>
+      <if test="flowStatus != null" >
+        flow_status,
+      </if>
+      <if test="approvalTime != null" >
+        approval_time,
+      </if>
+      <if test="approvalUserId != null" >
+        approval_user_id,
+      </if>
+      <if test="approvalUserName != null" >
+        approval_user_name,
+      </if>
+      <if test="approvalIdea != null" >
+        approval_idea,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="appCode != null" >
+        #{appCode,jdbcType=VARCHAR},
+      </if>
+      <if test="submitTime != null" >
+        #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitUserId != null" >
+        #{submitUserId,jdbcType=INTEGER},
+      </if>
+      <if test="submitUserName != null" >
+        #{submitUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="flowStep != null" >
+        #{flowStep,jdbcType=TINYINT},
+      </if>
+      <if test="flowStatus != null" >
+        #{flowStatus,jdbcType=TINYINT},
+      </if>
+      <if test="approvalTime != null" >
+        #{approvalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approvalUserId != null" >
+        #{approvalUserId,jdbcType=INTEGER},
+      </if>
+      <if test="approvalUserName != null" >
+        #{approvalUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalIdea != null" >
+        #{approvalIdea,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mljr.gps.entity.GpsFlow" >
+    update ca_gps_flow
+    <set >
+      <if test="appCode != null" >
+        app_code = #{appCode,jdbcType=VARCHAR},
+      </if>
+      <if test="submitTime != null" >
+        submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitUserId != null" >
+        submit_user_id = #{submitUserId,jdbcType=INTEGER},
+      </if>
+      <if test="submitUserName != null" >
+        submit_user_name = #{submitUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="flowStep != null" >
+        flow_step = #{flowStep,jdbcType=TINYINT},
+      </if>
+      <if test="flowStatus != null" >
+        flow_status = #{flowStatus,jdbcType=TINYINT},
+      </if>
+      <if test="approvalTime != null" >
+        approval_time = #{approvalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approvalUserId != null" >
+        approval_user_id = #{approvalUserId,jdbcType=INTEGER},
+      </if>
+      <if test="approvalUserName != null" >
+        approval_user_name = #{approvalUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalIdea != null" >
+        approval_idea = #{approvalIdea,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="violationSituation != null" >
+        violation_situation = #{violationSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="violationType != null" >
+        violation_type = #{violationType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mljr.gps.entity.GpsFlow" >
+    update ca_gps_flow
+    set app_code = #{appCode,jdbcType=VARCHAR},
+      submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      submit_user_id = #{submitUserId,jdbcType=INTEGER},
+      submit_user_name = #{submitUserName,jdbcType=VARCHAR},
+      flow_step = #{flowStep,jdbcType=TINYINT},
+      flow_status = #{flowStatus,jdbcType=TINYINT},
+      approval_time = #{approvalTime,jdbcType=TIMESTAMP},
+      approval_user_id = #{approvalUserId,jdbcType=INTEGER},
+      approval_user_name = #{approvalUserName,jdbcType=VARCHAR},
+      approval_idea = #{approvalIdea,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      violation_situation = #{violationSituation,jdbcType=TINYINT},
+      violation_type = #{violationType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="queryByAppCode" parameterType="string" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from ca_gps_flow where app_code = #{appCode}
+  </select>
+
+  <update id="updateRecord" parameterType="com.mljr.gps.entity.GpsFlow" >
+    update ca_gps_flow
+    <set >
+      <if test="submitTime != null" >
+        submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitUserId != null" >
+        submit_user_id = #{submitUserId,jdbcType=INTEGER},
+      </if>
+      <if test="submitUserName != null" >
+        submit_user_name = #{submitUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="flowStep != null" >
+        flow_step = #{flowStep,jdbcType=TINYINT},
+      </if>
+      <if test="flowStatus != null" >
+        flow_status = #{flowStatus,jdbcType=TINYINT},
+      </if>
+      <if test="approvalTime != null" >
+        approval_time = #{approvalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approvalUserId != null" >
+        approval_user_id = #{approvalUserId,jdbcType=INTEGER},
+      </if>
+      <if test="approvalUserName != null" >
+        approval_user_name = #{approvalUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalIdea != null" >
+        approval_idea = #{approvalIdea,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="violationSituation != null" >
+        violation_situation = #{violationSituation,jdbcType=TINYINT},
+      </if>
+      <if test="violationType != null" >
+        violation_type = #{violationType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where app_code = #{appCode,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateRecordByAppCode" parameterType="com.mljr.gps.entity.GpsFlow" >
+    update ca_gps_flow
+    set
+    flow_step = #{flowStep,jdbcType=TINYINT},
+    flow_status = #{flowStatus,jdbcType=TINYINT},
+    approval_time = #{approvalTime,jdbcType=TIMESTAMP},
+    approval_user_id = #{approvalUserId,jdbcType=INTEGER},
+    approval_user_name = #{approvalUserName,jdbcType=VARCHAR},
+    remark = #{remark,jdbcType=VARCHAR}
+    where app_code = #{appCode,jdbcType=VARCHAR}
+  </update>
+
+  <!-- 查询GPS申请单 -->
+  <select id="queryApplyForm" resultType="com.lyqc.gpsweb.vo.GpsApplyFormVo" parameterType="java.lang.String">
+    SELECT
+      a.APP_CODE AS appCode,
+      c.CAR_IDENTIFY AS carIdentify,
+      c.CAR_COLOR AS carColor,
+      c.CAR_SERIES as carSeries,
+      b.PROPPSER_NAME AS customerName,
+      d.DEALER_NAME AS dealerName,
+      e.phone AS dealerTelephone,
+      e.contract AS dealerContract,
+      e.installer AS installer,
+      e.address AS installAddress,
+      e.remark
+    FROM ca_app_info a
+      LEFT JOIN ca_proppser_info b ON b.PROPPSER_ID = a.PROPPSER_ID
+      LEFT JOIN ca_car_info c ON a.CAR_ID = c.CAR_ID
+      LEFT JOIN sy_dealer d ON d.DEALER_CODE = a.DEALER_CODE
+      LEFT JOIN ca_gps_contract e ON e.app_code = a.APP_CODE
+    WHERE
+      a.app_code = #{appCode}
+  </select>
+
+  <!-- 查询某个审批人 流程步骤为 【领单】操作的数据量 -->
+  <select id="getHasPullCountByApproveUserId" resultType="int" parameterType="java.lang.Integer">
+    SELECT count(1) FROM ca_gps_flow f
+    join ca_app_info a on a.APP_CODE = f.app_code
+    WHERE a.status not in ('7','8','9','10','11','12','13','20','21','22','23','24','30','32')
+    and f.flow_step = 3 AND f.approval_user_id = #{approvalUserId}
+  </select>
+
+  <!-- 查询一批人 流程步骤为 【领单】操作的数据量 -->
+  <select id="getMinGpsApprUsers" resultType="com.mljr.gps.entity.GpsAuditor" parameterType="java.util.List">
+    SELECT count(1) AS  num,f.approval_user_id AS approvalUserId FROM ca_gps_flow f
+    join ca_app_info a on a.APP_CODE = f.app_code
+    WHERE a.is_Gps ='2'
+    AND a.status not in ('7','8','9','10','11','12','13','20','21','22','23','24','30','32')
+    AND a.R_GPS_FEE > 0
+    AND a.manage_Approval_Time is not null
+    AND f.approval_user_id IN
+    <foreach collection="list" item="per" separator="," open="(" close=")">
+       #{per}
+    </foreach>
+    GROUP BY
+    f.approval_user_id
+  </select>
+
+</mapper>

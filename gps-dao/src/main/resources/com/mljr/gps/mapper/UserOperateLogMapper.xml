@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mljr.gps.mapper.UserOperateLogMapper" >
+  <resultMap id="BaseResultMap" type="com.mljr.gps.entity.UserOperateLog" >
+    <id column="FLOW_ID" property="flowId" jdbcType="BIGINT" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="INTEGER" />
+    <result column="AUTH_MODEL" property="authModel" jdbcType="INTEGER" />
+    <result column="AUTH_DATE" property="authDate" jdbcType="TIMESTAMP" />
+    <result column="AUTH_TYPE" property="authType" jdbcType="CHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.mljr.gps.entity.UserOperateLog" extends="BaseResultMap" >
+    <result column="auth_detail" property="authDetail" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    FLOW_ID, USER_NAME, USER_ID, AUTH_MODEL, AUTH_DATE, AUTH_TYPE
+  </sql>
+  <sql id="Blob_Column_List" >
+    auth_detail
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sy_user_operate_log
+    where FLOW_ID = #{flowId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sy_user_operate_log
+    where FLOW_ID = #{flowId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.mljr.gps.entity.UserOperateLog" >
+    insert into sy_user_operate_log (FLOW_ID, USER_NAME, USER_ID, 
+      AUTH_MODEL, AUTH_DATE, AUTH_TYPE, 
+      auth_detail)
+    values (#{flowId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{authModel,jdbcType=INTEGER}, #{authDate,jdbcType=VARCHAR}, #{authType,jdbcType=CHAR},
+      #{authDetail,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mljr.gps.entity.UserOperateLog" >
+    insert into sy_user_operate_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="flowId != null" >
+        FLOW_ID,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="authModel != null" >
+        AUTH_MODEL,
+      </if>
+      <if test="authDate != null" >
+        AUTH_DATE,
+      </if>
+      <if test="authType != null" >
+        AUTH_TYPE,
+      </if>
+      <if test="authDetail != null" >
+        auth_detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="flowId != null" >
+        #{flowId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="authModel != null" >
+        #{authModel,jdbcType=INTEGER},
+      </if>
+      <if test="authDate != null" >
+        #{authDate,jdbcType=VARCHAR},
+      </if>
+      <if test="authType != null" >
+        #{authType,jdbcType=CHAR},
+      </if>
+      <if test="authDetail != null" >
+        #{authDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mljr.gps.entity.UserOperateLog" >
+    update sy_user_operate_log
+    <set >
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="authModel != null" >
+        AUTH_MODEL = #{authModel,jdbcType=INTEGER},
+      </if>
+      <if test="authDate != null" >
+        AUTH_DATE = #{authDate,jdbcType=VARCHAR},
+      </if>
+      <if test="authType != null" >
+        AUTH_TYPE = #{authType,jdbcType=CHAR},
+      </if>
+      <if test="authDetail != null" >
+        auth_detail = #{authDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where FLOW_ID = #{flowId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.mljr.gps.entity.UserOperateLog" >
+    update sy_user_operate_log
+    set USER_NAME = #{userName,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=INTEGER},
+      AUTH_MODEL = #{authModel,jdbcType=INTEGER},
+      AUTH_DATE = #{authDate,jdbcType=VARCHAR},
+      AUTH_TYPE = #{authType,jdbcType=CHAR},
+      auth_detail = #{authDetail,jdbcType=LONGVARCHAR}
+    where FLOW_ID = #{flowId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mljr.gps.entity.UserOperateLog" >
+    update sy_user_operate_log
+    set USER_NAME = #{userName,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=INTEGER},
+      AUTH_MODEL = #{authModel,jdbcType=INTEGER},
+      AUTH_DATE = #{authDate,jdbcType=VARCHAR},
+      AUTH_TYPE = #{authType,jdbcType=CHAR}
+    where FLOW_ID = #{flowId,jdbcType=BIGINT}
+  </update>
+</mapper>

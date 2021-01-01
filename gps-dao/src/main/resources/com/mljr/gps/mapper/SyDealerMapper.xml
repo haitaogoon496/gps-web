@@ -1,0 +1,835 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mljr.gps.mapper.SyDealerMapper" >
+  <resultMap id="BaseResultMap" type="com.mljr.gps.entity.SyDealer" >
+    <id column="DEALER_CODE" property="dealerCode" jdbcType="INTEGER" />
+    <result column="DEALER_NAME" property="dealerName" jdbcType="VARCHAR" />
+    <result column="DEALER_TYPE" property="dealerType" jdbcType="CHAR" />
+    <result column="COMPANY_CODE" property="companyCode" jdbcType="INTEGER" />
+    <result column="REC_ACCOUNT_NAME" property="recAccountName" jdbcType="VARCHAR" />
+    <result column="REC_ACCOUNT_CARD" property="recAccountCard" jdbcType="VARCHAR" />
+    <result column="REC_ACCOUNT_BANK" property="recAccountBank" jdbcType="VARCHAR" />
+    <result column="BANK_PROVINCE" property="bankProvince" jdbcType="VARCHAR" />
+    <result column="BANK_CITY" property="bankCity" jdbcType="VARCHAR" />
+    <result column="REC_ACCOUNT_NO" property="recAccountNo" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="RTAMIL" property="rtamil" jdbcType="VARCHAR" />
+    <result column="AM" property="am" jdbcType="VARCHAR" />
+    <result column="SV" property="sv" jdbcType="VARCHAR" />
+    <result column="GM_NAME" property="gmName" jdbcType="VARCHAR" />
+    <result column="GM_MOBILE" property="gmMobile" jdbcType="VARCHAR" />
+    <result column="GM_PHONE" property="gmPhone" jdbcType="VARCHAR" />
+    <result column="GM_EMAIL" property="gmEmail" jdbcType="VARCHAR" />
+    <result column="SM_NAME" property="smName" jdbcType="VARCHAR" />
+    <result column="SM_MOBILE" property="smMobile" jdbcType="VARCHAR" />
+    <result column="SM_PHONE" property="smPhone" jdbcType="VARCHAR" />
+    <result column="SM_PSW" property="smPsw" jdbcType="VARCHAR" />
+    <result column="SM_EAMIL" property="smEamil" jdbcType="VARCHAR" />
+    <result column="FM_NAME" property="fmName" jdbcType="VARCHAR" />
+    <result column="FM_MOBILE" property="fmMobile" jdbcType="VARCHAR" />
+    <result column="FM_PHONE" property="fmPhone" jdbcType="VARCHAR" />
+    <result column="FM_EAMIL" property="fmEamil" jdbcType="VARCHAR" />
+    <result column="FM_PSW" property="fmPsw" jdbcType="VARCHAR" />
+    <result column="MM_NAME" property="mmName" jdbcType="VARCHAR" />
+    <result column="MM_MOBILE" property="mmMobile" jdbcType="VARCHAR" />
+    <result column="MM_PHONE" property="mmPhone" jdbcType="VARCHAR" />
+    <result column="MM_EAMIL" property="mmEamil" jdbcType="VARCHAR" />
+    <result column="SALE_NAME" property="saleName" jdbcType="VARCHAR" />
+    <result column="SALE_MOBILE" property="saleMobile" jdbcType="VARCHAR" />
+    <result column="SALE_PHONE" property="salePhone" jdbcType="VARCHAR" />
+    <result column="SALE_EMAIL" property="saleEmail" jdbcType="VARCHAR" />
+    <result column="TRAIN_NAME" property="trainName" jdbcType="VARCHAR" />
+    <result column="TRAIN_MOBILE" property="trainMobile" jdbcType="VARCHAR" />
+    <result column="TRAIN_PHONE" property="trainPhone" jdbcType="VARCHAR" />
+    <result column="TRAIN_EMAIL" property="trainEmail" jdbcType="VARCHAR" />
+    <result column="CLC_TYPE" property="clcType" jdbcType="DATE" />
+    <result column="SERVER_INVOICE_NAME" property="serverInvoiceName" jdbcType="VARCHAR" />
+    <result column="SERVER_INVOICE_TYPE" property="serverInvoiceType" jdbcType="CHAR" />
+    <result column="DEALER_EMAIL" property="dealerEmail" jdbcType="VARCHAR" />
+    <result column="CONTACT_PERSON" property="contactPerson" jdbcType="VARCHAR" />
+    <result column="ACCOUNT_NAME" property="accountName" jdbcType="VARCHAR" />
+    <result column="REMARKS1" property="remarks1" jdbcType="VARCHAR" />
+    <result column="INTEREST_RATE" property="interestRate" jdbcType="VARCHAR" />
+    <result column="PROVINCE_RATE" property="provinceRate" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="CHAR" />
+    <result column="ONLINE_TIME" property="onlineTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+    <result column="SALE_AREA" property="saleArea" jdbcType="VARCHAR" />
+    <result column="PROVINCE" property="province" jdbcType="VARCHAR" />
+    <result column="CITY" property="city" jdbcType="VARCHAR" />
+    <result column="REC_ACCOUNT_BANK2" property="recAccountBank2" jdbcType="VARCHAR" />
+    <result column="account_type" property="accountType" jdbcType="VARCHAR" />
+    <result column="BANK_MOBILE" property="bankMobile" jdbcType="VARCHAR" />
+    <result column="LINE_NUMBER" property="lineNumber" jdbcType="VARCHAR" />
+    <result column="is_fraud_flight" property="isFraudFlight" jdbcType="TINYINT" />
+    <!--<result column="BANK_PROVINCE_REG_CODE" property="bankProvinceRegCode" jdbcType="VARCHAR" />
+    <result column="BANK_CITY_REG_CODE" property="bankCityRegCode" jdbcType="VARCHAR" />
+    <result column="PROVINCE_REG_CODE" property="provinceRegCode" jdbcType="VARCHAR" />
+    <result column="CITY_REG_CODE" property="cityRegCode" jdbcType="VARCHAR" />-->
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DEALER_CODE, DEALER_NAME, DEALER_TYPE, COMPANY_CODE, REC_ACCOUNT_NAME, REC_ACCOUNT_CARD, 
+    REC_ACCOUNT_BANK, BANK_PROVINCE, BANK_CITY, REC_ACCOUNT_NO, ADDRESS, RTAMIL, AM, 
+    SV, GM_NAME, GM_MOBILE, GM_PHONE, GM_EMAIL, SM_NAME, SM_MOBILE, SM_PHONE, SM_PSW, 
+    SM_EAMIL, FM_NAME, FM_MOBILE, FM_PHONE, FM_EAMIL, FM_PSW, MM_NAME, MM_MOBILE, MM_PHONE, 
+    MM_EAMIL, SALE_NAME, SALE_MOBILE, SALE_PHONE, SALE_EMAIL, TRAIN_NAME, TRAIN_MOBILE, 
+    TRAIN_PHONE, TRAIN_EMAIL, CLC_TYPE, SERVER_INVOICE_NAME, SERVER_INVOICE_TYPE, DEALER_EMAIL, 
+    CONTACT_PERSON, ACCOUNT_NAME, REMARKS1, INTEREST_RATE, PROVINCE_RATE, STATUS, ONLINE_TIME, 
+    UPDATE_TIME, REMARKS, SALE_AREA, PROVINCE, CITY, REC_ACCOUNT_BANK2, account_type, 
+    BANK_MOBILE, LINE_NUMBER, is_fraud_flight
+    /*, BANK_PROVINCE_REG_CODE, BANK_CITY_REG_CODE,
+    PROVINCE_REG_CODE, CITY_REG_CODE*/
+  </sql>
+
+  <sql id="queryCondition">
+    <where>
+      <if test="form != null " >
+        <if test="form.dealerCode != null" >
+          AND DEALER_CODE = #{form.dealerCode,jdbcType=INTEGER}
+        </if>
+        <if test="form.dealerName != null" >
+          AND DEALER_NAME = #{form.dealerName,jdbcType=VARCHAR}
+        </if>
+        <if test="form.dealerCodes != null">
+          AND DEALER_CODE IN
+          <foreach collection="form.dealerCodes" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+          </foreach>
+        </if>
+      </if>
+    </where>
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sy_dealer
+    where DEALER_CODE = #{dealerCode,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sy_dealer
+    where DEALER_CODE = #{dealerCode,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mljr.gps.entity.SyDealer" >
+    insert into sy_dealer (DEALER_CODE, DEALER_NAME, DEALER_TYPE, 
+      COMPANY_CODE, REC_ACCOUNT_NAME, REC_ACCOUNT_CARD, 
+      REC_ACCOUNT_BANK, BANK_PROVINCE, BANK_CITY, 
+      REC_ACCOUNT_NO, ADDRESS, RTAMIL, 
+      AM, SV, GM_NAME, GM_MOBILE, 
+      GM_PHONE, GM_EMAIL, SM_NAME, 
+      SM_MOBILE, SM_PHONE, SM_PSW, 
+      SM_EAMIL, FM_NAME, FM_MOBILE, 
+      FM_PHONE, FM_EAMIL, FM_PSW, 
+      MM_NAME, MM_MOBILE, MM_PHONE, 
+      MM_EAMIL, SALE_NAME, SALE_MOBILE, 
+      SALE_PHONE, SALE_EMAIL, TRAIN_NAME, 
+      TRAIN_MOBILE, TRAIN_PHONE, TRAIN_EMAIL, 
+      CLC_TYPE, SERVER_INVOICE_NAME, SERVER_INVOICE_TYPE, 
+      DEALER_EMAIL, CONTACT_PERSON, ACCOUNT_NAME, 
+      REMARKS1, INTEREST_RATE, PROVINCE_RATE, 
+      STATUS, ONLINE_TIME, UPDATE_TIME, 
+      REMARKS, SALE_AREA, PROVINCE, 
+      CITY, REC_ACCOUNT_BANK2, account_type, 
+      BANK_MOBILE, LINE_NUMBER, is_fraud_flight/*,
+      BANK_PROVINCE_REG_CODE, BANK_CITY_REG_CODE, PROVINCE_REG_CODE, 
+      CITY_REG_CODE*/)
+    values (#{dealerCode,jdbcType=INTEGER}, #{dealerName,jdbcType=VARCHAR}, #{dealerType,jdbcType=CHAR}, 
+      #{companyCode,jdbcType=INTEGER}, #{recAccountName,jdbcType=VARCHAR}, #{recAccountCard,jdbcType=VARCHAR}, 
+      #{recAccountBank,jdbcType=VARCHAR}, #{bankProvince,jdbcType=VARCHAR}, #{bankCity,jdbcType=VARCHAR}, 
+      #{recAccountNo,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{rtamil,jdbcType=VARCHAR}, 
+      #{am,jdbcType=VARCHAR}, #{sv,jdbcType=VARCHAR}, #{gmName,jdbcType=VARCHAR}, #{gmMobile,jdbcType=VARCHAR}, 
+      #{gmPhone,jdbcType=VARCHAR}, #{gmEmail,jdbcType=VARCHAR}, #{smName,jdbcType=VARCHAR}, 
+      #{smMobile,jdbcType=VARCHAR}, #{smPhone,jdbcType=VARCHAR}, #{smPsw,jdbcType=VARCHAR}, 
+      #{smEamil,jdbcType=VARCHAR}, #{fmName,jdbcType=VARCHAR}, #{fmMobile,jdbcType=VARCHAR}, 
+      #{fmPhone,jdbcType=VARCHAR}, #{fmEamil,jdbcType=VARCHAR}, #{fmPsw,jdbcType=VARCHAR}, 
+      #{mmName,jdbcType=VARCHAR}, #{mmMobile,jdbcType=VARCHAR}, #{mmPhone,jdbcType=VARCHAR}, 
+      #{mmEamil,jdbcType=VARCHAR}, #{saleName,jdbcType=VARCHAR}, #{saleMobile,jdbcType=VARCHAR}, 
+      #{salePhone,jdbcType=VARCHAR}, #{saleEmail,jdbcType=VARCHAR}, #{trainName,jdbcType=VARCHAR}, 
+      #{trainMobile,jdbcType=VARCHAR}, #{trainPhone,jdbcType=VARCHAR}, #{trainEmail,jdbcType=VARCHAR}, 
+      #{clcType,jdbcType=DATE}, #{serverInvoiceName,jdbcType=VARCHAR}, #{serverInvoiceType,jdbcType=CHAR}, 
+      #{dealerEmail,jdbcType=VARCHAR}, #{contactPerson,jdbcType=VARCHAR}, #{accountName,jdbcType=VARCHAR}, 
+      #{remarks1,jdbcType=VARCHAR}, #{interestRate,jdbcType=VARCHAR}, #{provinceRate,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{onlineTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{remarks,jdbcType=VARCHAR}, #{saleArea,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{recAccountBank2,jdbcType=VARCHAR}, #{accountType,jdbcType=VARCHAR}, 
+      #{bankMobile,jdbcType=VARCHAR}, #{lineNumber,jdbcType=VARCHAR}, #{isFraudFlight,jdbcType=TINYINT}/*,
+      #{bankProvinceRegCode,jdbcType=VARCHAR}, #{bankCityRegCode,jdbcType=VARCHAR}, #{provinceRegCode,jdbcType=VARCHAR}, 
+      #{cityRegCode,jdbcType=VARCHAR}*/)
+  </insert>
+  <insert id="insertSelective" parameterType="com.mljr.gps.entity.SyDealer" >
+    insert into sy_dealer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dealerCode != null" >
+        DEALER_CODE,
+      </if>
+      <if test="dealerName != null" >
+        DEALER_NAME,
+      </if>
+      <if test="dealerType != null" >
+        DEALER_TYPE,
+      </if>
+      <if test="companyCode != null" >
+        COMPANY_CODE,
+      </if>
+      <if test="recAccountName != null" >
+        REC_ACCOUNT_NAME,
+      </if>
+      <if test="recAccountCard != null" >
+        REC_ACCOUNT_CARD,
+      </if>
+      <if test="recAccountBank != null" >
+        REC_ACCOUNT_BANK,
+      </if>
+      <if test="bankProvince != null" >
+        BANK_PROVINCE,
+      </if>
+      <if test="bankCity != null" >
+        BANK_CITY,
+      </if>
+      <if test="recAccountNo != null" >
+        REC_ACCOUNT_NO,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="rtamil != null" >
+        RTAMIL,
+      </if>
+      <if test="am != null" >
+        AM,
+      </if>
+      <if test="sv != null" >
+        SV,
+      </if>
+      <if test="gmName != null" >
+        GM_NAME,
+      </if>
+      <if test="gmMobile != null" >
+        GM_MOBILE,
+      </if>
+      <if test="gmPhone != null" >
+        GM_PHONE,
+      </if>
+      <if test="gmEmail != null" >
+        GM_EMAIL,
+      </if>
+      <if test="smName != null" >
+        SM_NAME,
+      </if>
+      <if test="smMobile != null" >
+        SM_MOBILE,
+      </if>
+      <if test="smPhone != null" >
+        SM_PHONE,
+      </if>
+      <if test="smPsw != null" >
+        SM_PSW,
+      </if>
+      <if test="smEamil != null" >
+        SM_EAMIL,
+      </if>
+      <if test="fmName != null" >
+        FM_NAME,
+      </if>
+      <if test="fmMobile != null" >
+        FM_MOBILE,
+      </if>
+      <if test="fmPhone != null" >
+        FM_PHONE,
+      </if>
+      <if test="fmEamil != null" >
+        FM_EAMIL,
+      </if>
+      <if test="fmPsw != null" >
+        FM_PSW,
+      </if>
+      <if test="mmName != null" >
+        MM_NAME,
+      </if>
+      <if test="mmMobile != null" >
+        MM_MOBILE,
+      </if>
+      <if test="mmPhone != null" >
+        MM_PHONE,
+      </if>
+      <if test="mmEamil != null" >
+        MM_EAMIL,
+      </if>
+      <if test="saleName != null" >
+        SALE_NAME,
+      </if>
+      <if test="saleMobile != null" >
+        SALE_MOBILE,
+      </if>
+      <if test="salePhone != null" >
+        SALE_PHONE,
+      </if>
+      <if test="saleEmail != null" >
+        SALE_EMAIL,
+      </if>
+      <if test="trainName != null" >
+        TRAIN_NAME,
+      </if>
+      <if test="trainMobile != null" >
+        TRAIN_MOBILE,
+      </if>
+      <if test="trainPhone != null" >
+        TRAIN_PHONE,
+      </if>
+      <if test="trainEmail != null" >
+        TRAIN_EMAIL,
+      </if>
+      <if test="clcType != null" >
+        CLC_TYPE,
+      </if>
+      <if test="serverInvoiceName != null" >
+        SERVER_INVOICE_NAME,
+      </if>
+      <if test="serverInvoiceType != null" >
+        SERVER_INVOICE_TYPE,
+      </if>
+      <if test="dealerEmail != null" >
+        DEALER_EMAIL,
+      </if>
+      <if test="contactPerson != null" >
+        CONTACT_PERSON,
+      </if>
+      <if test="accountName != null" >
+        ACCOUNT_NAME,
+      </if>
+      <if test="remarks1 != null" >
+        REMARKS1,
+      </if>
+      <if test="interestRate != null" >
+        INTEREST_RATE,
+      </if>
+      <if test="provinceRate != null" >
+        PROVINCE_RATE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="onlineTime != null" >
+        ONLINE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="remarks != null" >
+        REMARKS,
+      </if>
+      <if test="saleArea != null" >
+        SALE_AREA,
+      </if>
+      <if test="province != null" >
+        PROVINCE,
+      </if>
+      <if test="city != null" >
+        CITY,
+      </if>
+      <if test="recAccountBank2 != null" >
+        REC_ACCOUNT_BANK2,
+      </if>
+      <if test="accountType != null" >
+        account_type,
+      </if>
+      <if test="bankMobile != null" >
+        BANK_MOBILE,
+      </if>
+      <if test="lineNumber != null" >
+        LINE_NUMBER,
+      </if>
+      <if test="isFraudFlight != null" >
+        is_fraud_flight,
+      </if>
+      <!--<if test="bankProvinceRegCode != null" >
+        BANK_PROVINCE_REG_CODE,
+      </if>
+      <if test="bankCityRegCode != null" >
+        BANK_CITY_REG_CODE,
+      </if>
+      <if test="provinceRegCode != null" >
+        PROVINCE_REG_CODE,
+      </if>
+      <if test="cityRegCode != null" >
+        CITY_REG_CODE,
+      </if>-->
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dealerCode != null" >
+        #{dealerCode,jdbcType=INTEGER},
+      </if>
+      <if test="dealerName != null" >
+        #{dealerName,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerType != null" >
+        #{dealerType,jdbcType=CHAR},
+      </if>
+      <if test="companyCode != null" >
+        #{companyCode,jdbcType=INTEGER},
+      </if>
+      <if test="recAccountName != null" >
+        #{recAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="recAccountCard != null" >
+        #{recAccountCard,jdbcType=VARCHAR},
+      </if>
+      <if test="recAccountBank != null" >
+        #{recAccountBank,jdbcType=VARCHAR},
+      </if>
+      <if test="bankProvince != null" >
+        #{bankProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCity != null" >
+        #{bankCity,jdbcType=VARCHAR},
+      </if>
+      <if test="recAccountNo != null" >
+        #{recAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="rtamil != null" >
+        #{rtamil,jdbcType=VARCHAR},
+      </if>
+      <if test="am != null" >
+        #{am,jdbcType=VARCHAR},
+      </if>
+      <if test="sv != null" >
+        #{sv,jdbcType=VARCHAR},
+      </if>
+      <if test="gmName != null" >
+        #{gmName,jdbcType=VARCHAR},
+      </if>
+      <if test="gmMobile != null" >
+        #{gmMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="gmPhone != null" >
+        #{gmPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="gmEmail != null" >
+        #{gmEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="smName != null" >
+        #{smName,jdbcType=VARCHAR},
+      </if>
+      <if test="smMobile != null" >
+        #{smMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="smPhone != null" >
+        #{smPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="smPsw != null" >
+        #{smPsw,jdbcType=VARCHAR},
+      </if>
+      <if test="smEamil != null" >
+        #{smEamil,jdbcType=VARCHAR},
+      </if>
+      <if test="fmName != null" >
+        #{fmName,jdbcType=VARCHAR},
+      </if>
+      <if test="fmMobile != null" >
+        #{fmMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="fmPhone != null" >
+        #{fmPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="fmEamil != null" >
+        #{fmEamil,jdbcType=VARCHAR},
+      </if>
+      <if test="fmPsw != null" >
+        #{fmPsw,jdbcType=VARCHAR},
+      </if>
+      <if test="mmName != null" >
+        #{mmName,jdbcType=VARCHAR},
+      </if>
+      <if test="mmMobile != null" >
+        #{mmMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="mmPhone != null" >
+        #{mmPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="mmEamil != null" >
+        #{mmEamil,jdbcType=VARCHAR},
+      </if>
+      <if test="saleName != null" >
+        #{saleName,jdbcType=VARCHAR},
+      </if>
+      <if test="saleMobile != null" >
+        #{saleMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="salePhone != null" >
+        #{salePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="saleEmail != null" >
+        #{saleEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="trainName != null" >
+        #{trainName,jdbcType=VARCHAR},
+      </if>
+      <if test="trainMobile != null" >
+        #{trainMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="trainPhone != null" >
+        #{trainPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="trainEmail != null" >
+        #{trainEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="clcType != null" >
+        #{clcType,jdbcType=DATE},
+      </if>
+      <if test="serverInvoiceName != null" >
+        #{serverInvoiceName,jdbcType=VARCHAR},
+      </if>
+      <if test="serverInvoiceType != null" >
+        #{serverInvoiceType,jdbcType=CHAR},
+      </if>
+      <if test="dealerEmail != null" >
+        #{dealerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPerson != null" >
+        #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null" >
+        #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks1 != null" >
+        #{remarks1,jdbcType=VARCHAR},
+      </if>
+      <if test="interestRate != null" >
+        #{interestRate,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceRate != null" >
+        #{provinceRate,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="onlineTime != null" >
+        #{onlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="saleArea != null" >
+        #{saleArea,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="recAccountBank2 != null" >
+        #{recAccountBank2,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null" >
+        #{accountType,jdbcType=VARCHAR},
+      </if>
+      <if test="bankMobile != null" >
+        #{bankMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="lineNumber != null" >
+        #{lineNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="isFraudFlight != null" >
+        #{isFraudFlight,jdbcType=TINYINT},
+      </if>
+      <!--<if test="bankProvinceRegCode != null" >
+        #{bankProvinceRegCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCityRegCode != null" >
+        #{bankCityRegCode,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceRegCode != null" >
+        #{provinceRegCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityRegCode != null" >
+        #{cityRegCode,jdbcType=VARCHAR},
+      </if>-->
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mljr.gps.entity.SyDealer" >
+    update sy_dealer
+    <set >
+      <if test="dealerName != null" >
+        DEALER_NAME = #{dealerName,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerType != null" >
+        DEALER_TYPE = #{dealerType,jdbcType=CHAR},
+      </if>
+      <if test="companyCode != null" >
+        COMPANY_CODE = #{companyCode,jdbcType=INTEGER},
+      </if>
+      <if test="recAccountName != null" >
+        REC_ACCOUNT_NAME = #{recAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="recAccountCard != null" >
+        REC_ACCOUNT_CARD = #{recAccountCard,jdbcType=VARCHAR},
+      </if>
+      <if test="recAccountBank != null" >
+        REC_ACCOUNT_BANK = #{recAccountBank,jdbcType=VARCHAR},
+      </if>
+      <if test="bankProvince != null" >
+        BANK_PROVINCE = #{bankProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCity != null" >
+        BANK_CITY = #{bankCity,jdbcType=VARCHAR},
+      </if>
+      <if test="recAccountNo != null" >
+        REC_ACCOUNT_NO = #{recAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="rtamil != null" >
+        RTAMIL = #{rtamil,jdbcType=VARCHAR},
+      </if>
+      <if test="am != null" >
+        AM = #{am,jdbcType=VARCHAR},
+      </if>
+      <if test="sv != null" >
+        SV = #{sv,jdbcType=VARCHAR},
+      </if>
+      <if test="gmName != null" >
+        GM_NAME = #{gmName,jdbcType=VARCHAR},
+      </if>
+      <if test="gmMobile != null" >
+        GM_MOBILE = #{gmMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="gmPhone != null" >
+        GM_PHONE = #{gmPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="gmEmail != null" >
+        GM_EMAIL = #{gmEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="smName != null" >
+        SM_NAME = #{smName,jdbcType=VARCHAR},
+      </if>
+      <if test="smMobile != null" >
+        SM_MOBILE = #{smMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="smPhone != null" >
+        SM_PHONE = #{smPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="smPsw != null" >
+        SM_PSW = #{smPsw,jdbcType=VARCHAR},
+      </if>
+      <if test="smEamil != null" >
+        SM_EAMIL = #{smEamil,jdbcType=VARCHAR},
+      </if>
+      <if test="fmName != null" >
+        FM_NAME = #{fmName,jdbcType=VARCHAR},
+      </if>
+      <if test="fmMobile != null" >
+        FM_MOBILE = #{fmMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="fmPhone != null" >
+        FM_PHONE = #{fmPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="fmEamil != null" >
+        FM_EAMIL = #{fmEamil,jdbcType=VARCHAR},
+      </if>
+      <if test="fmPsw != null" >
+        FM_PSW = #{fmPsw,jdbcType=VARCHAR},
+      </if>
+      <if test="mmName != null" >
+        MM_NAME = #{mmName,jdbcType=VARCHAR},
+      </if>
+      <if test="mmMobile != null" >
+        MM_MOBILE = #{mmMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="mmPhone != null" >
+        MM_PHONE = #{mmPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="mmEamil != null" >
+        MM_EAMIL = #{mmEamil,jdbcType=VARCHAR},
+      </if>
+      <if test="saleName != null" >
+        SALE_NAME = #{saleName,jdbcType=VARCHAR},
+      </if>
+      <if test="saleMobile != null" >
+        SALE_MOBILE = #{saleMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="salePhone != null" >
+        SALE_PHONE = #{salePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="saleEmail != null" >
+        SALE_EMAIL = #{saleEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="trainName != null" >
+        TRAIN_NAME = #{trainName,jdbcType=VARCHAR},
+      </if>
+      <if test="trainMobile != null" >
+        TRAIN_MOBILE = #{trainMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="trainPhone != null" >
+        TRAIN_PHONE = #{trainPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="trainEmail != null" >
+        TRAIN_EMAIL = #{trainEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="clcType != null" >
+        CLC_TYPE = #{clcType,jdbcType=DATE},
+      </if>
+      <if test="serverInvoiceName != null" >
+        SERVER_INVOICE_NAME = #{serverInvoiceName,jdbcType=VARCHAR},
+      </if>
+      <if test="serverInvoiceType != null" >
+        SERVER_INVOICE_TYPE = #{serverInvoiceType,jdbcType=CHAR},
+      </if>
+      <if test="dealerEmail != null" >
+        DEALER_EMAIL = #{dealerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPerson != null" >
+        CONTACT_PERSON = #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null" >
+        ACCOUNT_NAME = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks1 != null" >
+        REMARKS1 = #{remarks1,jdbcType=VARCHAR},
+      </if>
+      <if test="interestRate != null" >
+        INTEREST_RATE = #{interestRate,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceRate != null" >
+        PROVINCE_RATE = #{provinceRate,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=CHAR},
+      </if>
+      <if test="onlineTime != null" >
+        ONLINE_TIME = #{onlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="saleArea != null" >
+        SALE_AREA = #{saleArea,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        PROVINCE = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="recAccountBank2 != null" >
+        REC_ACCOUNT_BANK2 = #{recAccountBank2,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null" >
+        account_type = #{accountType,jdbcType=VARCHAR},
+      </if>
+      <if test="bankMobile != null" >
+        BANK_MOBILE = #{bankMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="lineNumber != null" >
+        LINE_NUMBER = #{lineNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="isFraudFlight != null" >
+        is_fraud_flight = #{isFraudFlight,jdbcType=TINYINT},
+      </if>
+      <!--<if test="bankProvinceRegCode != null" >
+        BANK_PROVINCE_REG_CODE = #{bankProvinceRegCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCityRegCode != null" >
+        BANK_CITY_REG_CODE = #{bankCityRegCode,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceRegCode != null" >
+        PROVINCE_REG_CODE = #{provinceRegCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityRegCode != null" >
+        CITY_REG_CODE = #{cityRegCode,jdbcType=VARCHAR},
+      </if>-->
+    </set>
+    where DEALER_CODE = #{dealerCode,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mljr.gps.entity.SyDealer" >
+    update sy_dealer
+    set DEALER_NAME = #{dealerName,jdbcType=VARCHAR},
+      DEALER_TYPE = #{dealerType,jdbcType=CHAR},
+      COMPANY_CODE = #{companyCode,jdbcType=INTEGER},
+      REC_ACCOUNT_NAME = #{recAccountName,jdbcType=VARCHAR},
+      REC_ACCOUNT_CARD = #{recAccountCard,jdbcType=VARCHAR},
+      REC_ACCOUNT_BANK = #{recAccountBank,jdbcType=VARCHAR},
+      BANK_PROVINCE = #{bankProvince,jdbcType=VARCHAR},
+      BANK_CITY = #{bankCity,jdbcType=VARCHAR},
+      REC_ACCOUNT_NO = #{recAccountNo,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      RTAMIL = #{rtamil,jdbcType=VARCHAR},
+      AM = #{am,jdbcType=VARCHAR},
+      SV = #{sv,jdbcType=VARCHAR},
+      GM_NAME = #{gmName,jdbcType=VARCHAR},
+      GM_MOBILE = #{gmMobile,jdbcType=VARCHAR},
+      GM_PHONE = #{gmPhone,jdbcType=VARCHAR},
+      GM_EMAIL = #{gmEmail,jdbcType=VARCHAR},
+      SM_NAME = #{smName,jdbcType=VARCHAR},
+      SM_MOBILE = #{smMobile,jdbcType=VARCHAR},
+      SM_PHONE = #{smPhone,jdbcType=VARCHAR},
+      SM_PSW = #{smPsw,jdbcType=VARCHAR},
+      SM_EAMIL = #{smEamil,jdbcType=VARCHAR},
+      FM_NAME = #{fmName,jdbcType=VARCHAR},
+      FM_MOBILE = #{fmMobile,jdbcType=VARCHAR},
+      FM_PHONE = #{fmPhone,jdbcType=VARCHAR},
+      FM_EAMIL = #{fmEamil,jdbcType=VARCHAR},
+      FM_PSW = #{fmPsw,jdbcType=VARCHAR},
+      MM_NAME = #{mmName,jdbcType=VARCHAR},
+      MM_MOBILE = #{mmMobile,jdbcType=VARCHAR},
+      MM_PHONE = #{mmPhone,jdbcType=VARCHAR},
+      MM_EAMIL = #{mmEamil,jdbcType=VARCHAR},
+      SALE_NAME = #{saleName,jdbcType=VARCHAR},
+      SALE_MOBILE = #{saleMobile,jdbcType=VARCHAR},
+      SALE_PHONE = #{salePhone,jdbcType=VARCHAR},
+      SALE_EMAIL = #{saleEmail,jdbcType=VARCHAR},
+      TRAIN_NAME = #{trainName,jdbcType=VARCHAR},
+      TRAIN_MOBILE = #{trainMobile,jdbcType=VARCHAR},
+      TRAIN_PHONE = #{trainPhone,jdbcType=VARCHAR},
+      TRAIN_EMAIL = #{trainEmail,jdbcType=VARCHAR},
+      CLC_TYPE = #{clcType,jdbcType=DATE},
+      SERVER_INVOICE_NAME = #{serverInvoiceName,jdbcType=VARCHAR},
+      SERVER_INVOICE_TYPE = #{serverInvoiceType,jdbcType=CHAR},
+      DEALER_EMAIL = #{dealerEmail,jdbcType=VARCHAR},
+      CONTACT_PERSON = #{contactPerson,jdbcType=VARCHAR},
+      ACCOUNT_NAME = #{accountName,jdbcType=VARCHAR},
+      REMARKS1 = #{remarks1,jdbcType=VARCHAR},
+      INTEREST_RATE = #{interestRate,jdbcType=VARCHAR},
+      PROVINCE_RATE = #{provinceRate,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=CHAR},
+      ONLINE_TIME = #{onlineTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      REMARKS = #{remarks,jdbcType=VARCHAR},
+      SALE_AREA = #{saleArea,jdbcType=VARCHAR},
+      PROVINCE = #{province,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      REC_ACCOUNT_BANK2 = #{recAccountBank2,jdbcType=VARCHAR},
+      account_type = #{accountType,jdbcType=VARCHAR},
+      BANK_MOBILE = #{bankMobile,jdbcType=VARCHAR},
+      LINE_NUMBER = #{lineNumber,jdbcType=VARCHAR},
+      is_fraud_flight = #{isFraudFlight,jdbcType=TINYINT}
+      /*,
+      BANK_PROVINCE_REG_CODE = #{bankProvinceRegCode,jdbcType=VARCHAR},
+      BANK_CITY_REG_CODE = #{bankCityRegCode,jdbcType=VARCHAR},
+      PROVINCE_REG_CODE = #{provinceRegCode,jdbcType=VARCHAR},
+      CITY_REG_CODE = #{cityRegCode,jdbcType=VARCHAR}*/
+    where DEALER_CODE = #{dealerCode,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="pageQuery" resultMap="BaseResultMap" parameterType="com.lyqc.base.page.PageForm">
+    select
+    <include refid="Base_Column_List" />
+    from sy_dealer
+    <include refid="queryCondition"/>
+    <if test="paging == true">
+      limit #{limit} offset #{start}
+    </if>
+  </select>
+</mapper>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mljr.gps.mapper.GpsOperateRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.mljr.gps.entity.GpsOperateRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="app_code" property="appCode" jdbcType="VARCHAR" />
+    <result column="flow_step" property="flowStep" jdbcType="TINYINT" />
+    <result column="flow_status" property="flowStatus" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user_id" property="createUserId" jdbcType="INTEGER" />
+    <result column="create_user_name" property="createUserName" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, app_code, flow_step, flow_status, create_time, create_user_id, create_user_name, 
+    remark
+  </sql>
+  <sql id="queryListCondition">
+    <where>
+      <if test="appCodeScope != null">
+        AND app_code in
+        <foreach collection="appCodeScope" item="item" index="index" open="(" close=")" separator=",">
+          #{item}
+        </foreach>
+      </if>
+      <if test="appCode != null">
+        app_code = #{appCode}
+      </if>
+      <if test="flowStatus != null">
+        AND flow_status = #{flowStatus}
+      </if>
+    </where>
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ca_gps_operate_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ca_gps_operate_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mljr.gps.entity.GpsOperateRecord" >
+    insert into ca_gps_operate_record (id, app_code, flow_step, 
+      flow_status, create_time, create_user_id, 
+      create_user_name, remark)
+    values (#{id,jdbcType=INTEGER}, #{appCode,jdbcType=VARCHAR}, #{flowStep,jdbcType=TINYINT}, 
+      #{flowStatus,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=INTEGER}, 
+      #{createUserName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mljr.gps.entity.GpsOperateRecord" >
+    insert into ca_gps_operate_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="appCode != null" >
+        app_code,
+      </if>
+      <if test="flowStep != null" >
+        flow_step,
+      </if>
+      <if test="flowStatus != null" >
+        flow_status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createUserName != null" >
+        create_user_name,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="appCode != null" >
+        #{appCode,jdbcType=VARCHAR},
+      </if>
+      <if test="flowStep != null" >
+        #{flowStep,jdbcType=TINYINT},
+      </if>
+      <if test="flowStatus != null" >
+        #{flowStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="createUserName != null" >
+        #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mljr.gps.entity.GpsOperateRecord" >
+    update ca_gps_operate_record
+    <set >
+      <if test="appCode != null" >
+        app_code = #{appCode,jdbcType=VARCHAR},
+      </if>
+      <if test="flowStep != null" >
+        flow_step = #{flowStep,jdbcType=TINYINT},
+      </if>
+      <if test="flowStatus != null" >
+        flow_status = #{flowStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="createUserName != null" >
+        create_user_name = #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mljr.gps.entity.GpsOperateRecord" >
+    update ca_gps_operate_record
+    set app_code = #{appCode,jdbcType=VARCHAR},
+      flow_step = #{flowStep,jdbcType=TINYINT},
+      flow_status = #{flowStatus,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=INTEGER},
+      create_user_name = #{createUserName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertRecord" parameterType="com.mljr.gps.entity.GpsOperateRecord" >
+    insert into ca_gps_operate_record (id, app_code, flow_step,
+    flow_status, create_time, create_user_id,
+    create_user_name, remark)
+    values (#{id,jdbcType=INTEGER}, #{appCode,jdbcType=VARCHAR}, #{flowStep,jdbcType=TINYINT},
+    #{flowStatus,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=INTEGER},
+    #{createUserName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+
+  <select id="queryList" parameterType="com.mljr.gps.form.GpsOperateRecordForm" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from ca_gps_operate_record
+    <include refid="queryListCondition"/>
+  </select>
+
+  <select id="queryListByAppCodes" resultType="java.lang.String" parameterType="com.mljr.gps.form.GpsOperateRecordForm">
+    select
+    app_code
+    from ca_gps_operate_record
+    <include refid="queryListCondition"/>
+  </select>
+
+  <select id="queryListByAppCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    from ca_gps_operate_record
+    where app_code = #{appCode}
+    order by create_time desc
+  </select>
+</mapper>

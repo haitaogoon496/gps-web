@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mljr.gps.mapper.GpsCompositeQueryMapper">
+  <sql id="pageQueryWhere">
+    <where>
+      f.flow_step > 0 and a.IS_GPS > 0 and a.R_GPS_FEE > 0
+      <if test="form != null">
+        <if test="form.customerName != null and form.customerName !=''">
+          and b.PROPPSER_NAME = #{form.customerName}
+        </if>
+        <if test="form.approvalUserId != null and form.approvalUserId !=''">
+          and f.approval_user_id = #{form.approvalUserId}
+        </if>
+        <if test="form.beginTime != null and form.beginTime !=''">
+            <![CDATA[ and f.approval_time >= #{form.beginTime}  ]]>
+        </if>
+        <if test="form.endTime != null and form.endTime !=''">
+            <![CDATA[ and f.approval_time <= #{form.endTime}  ]]>
+        </if>
+        <if test="form.isGps != null and form.isGps !=''">
+          and a.is_gps = #{form.isGps}
+        </if>
+      </if>
+    </where>
+  </sql>
+  <!-- 直销：销售（ca_app_info.belong_sale 关联 ca_zy_sale.sale_id）； 渠道:销售专员(ca_app_info.user_id 关联 sy_user.user_id) -->
+  <select id="pageQuery" resultType="com.mljr.gps.entity.GpsCompositeQuery" parameterType="com.lyqc.base.page.PageForm">
+    SELECT
+        a.APP_CODE as appCode,
+        a.is_gps as isGps,
+        a.A_LOAN_PERIODS as loanPeriods,
+        c.CAR_IDENTIFY as carIdentify,
+        c.CAR_COLOR as carColor,
+        c.CAR_SERIES as carSeries,
+        <if test="form.systemCode == '100000' ">
+        s.SALE_NAME as saleName,
+        </if>
+        <if test="form.systemCode == '200000' ">
+        s.true_name as saleName,
+        </if>
+        b.PROPPSER_NAME as customerName,
+        d.province,
+        p.COMPANY_NAME as companyName,
+        d.dealer_code as dealerCode,
+        d.dealer_code as dealerCode,
+        d.DEALER_NAME as dealerName,
+        DATE_FORMAT(f.approval_time,'%Y-%m-%d') AS auditDate,
+        f.approval_idea as auditIdea,
+        f.approval_user_id as approvalUserId,
+        f.approval_user_name as approvalUserName
+    FROM
+        ca_app_info a
+        LEFT JOIN ca_proppser_info b ON b.PROPPSER_ID = a.PROPPSER_ID
+        LEFT JOIN ca_car_info c ON a.CAR_ID = c.CAR_ID
+        LEFT JOIN sy_dealer d on d.DEALER_CODE = a.DEALER_CODE
+        LEFT JOIN sy_dealer_company p on p.COMPANY_CODE = d.COMPANY_CODE
+        <!-- ca_zy_sale这个表竟然有重复数据，比如sale_id=7244 -->
+        <if test="form.systemCode == '100000' ">
+            LEFT JOIN (select s.SALE_ID,s.SALE_NAME from ca_zy_sale s group by s.SALE_ID) s ON s.SALE_ID = a.BELONG_SALE
+        </if>
+        <if test="form.systemCode == '200000' ">
+            LEFT JOIN sy_user s on s.user_id = a.user_id
+        </if>
+        LEFT JOIN ca_gps_flow f ON f.app_code = a.APP_CODE
+      <include refid="pageQueryWhere"/>
+      order by f.approval_time desc
+      limit #{limit} offset #{start}
+  </select>
+
+  <select id="queryCount" resultType="int" parameterType="com.lyqc.base.page.PageForm">
+    select
+      COUNT(1) from ca_app_info a
+        LEFT JOIN ca_proppser_info b ON b.PROPPSER_ID = a.PROPPSER_ID
+        LEFT JOIN ca_car_info c ON a.CAR_ID = c.CAR_ID
+        LEFT JOIN ca_gps_flow f ON f.app_code = a.APP_CODE
+    <include refid="pageQueryWhere"/>
+  </select>
+
+    <!-- 直销：销售（ca_app_info.belong_sale 关联 ca_zy_sale.sale_id）； 渠道:销售专员(ca_app_info.user_id 关联 sy_user.user_id) -->
+    <select id="queryMineApprExportByPage" resultType="com.mljr.gps.entity.GpsCompositeQuery" parameterType="com.lyqc.base.page.PageForm">
+        SELECT
+            a.APP_CODE as appCode,
+            a.is_gps as isGps,
+            a.A_LOAN_PERIODS as loanPeriods,
+            c.CAR_IDENTIFY as carIdentify,
+            c.CAR_COLOR as carColor,
+            c.CAR_SERIES as carSeries,
+            <if test="form.systemCode == '100000' ">
+                s.SALE_NAME as saleName,
+            </if>
+            <if test="form.systemCode == '200000' ">
+                s.true_name as saleName,
+            </if>
+            b.PROPPSER_NAME as customerName,
+            d.province,
+            p.COMPANY_NAME as companyName,
+            d.dealer_code as dealerCode,
+            d.dealer_code as dealerCode,
+            d.DEALER_NAME as dealerName,
+            DATE_FORMAT(f.approval_time,'%Y-%m-%d') AS auditDate,
+            f.approval_idea as auditIdea,
+            f.approval_user_id as approvalUserId,
+            f.approval_user_name as approvalUserName
+        FROM
+            ca_app_info a
+            LEFT JOIN ca_proppser_info b ON b.PROPPSER_ID = a.PROPPSER_ID
+            LEFT JOIN ca_car_info c ON a.CAR_ID = c.CAR_ID
+            LEFT JOIN sy_dealer d on d.DEALER_CODE = a.DEALER_CODE
+            LEFT JOIN sy_dealer_company p on p.COMPANY_CODE = d.COMPANY_CODE
+            <!-- ca_zy_sale这个表竟然有重复数据，比如sale_id=7244 -->
+            <if test="form.systemCode == '100000' ">
+                LEFT JOIN (select s.SALE_ID,s.SALE_NAME from ca_zy_sale s group by s.SALE_ID) s ON s.SALE_ID = a.BELONG_SALE
+            </if>
+            <if test="form.systemCode == '200000' ">
+                LEFT JOIN sy_user s on s.user_id = a.user_id
+            </if>
+            LEFT JOIN ca_gps_flow f ON f.app_code = a.APP_CODE
+            WHERE
+            <if test="form.approvalUserId != null and form.approvalUserId !=''">
+                 f.approval_user_id = #{form.approvalUserId}
+            </if>
+            <if test="form.excludeStatusScope != null and form.excludeStatusScope.size > 0">
+                and a.status not in
+                <foreach collection="form.excludeStatusScope" item="item" index="index" open="(" close=")" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+            AND a.is_Gps ='2'  and a.R_GPS_FEE > 0 and a.manage_Approval_Time IS NOT NULL
+        order by f.approval_time desc
+        limit #{limit} offset #{start}
+    </select>
+
+    <select id="queryMineApprExportCount" resultType="int" parameterType="com.lyqc.base.page.PageForm">
+        select
+        COUNT(1) from ca_app_info a
+        LEFT JOIN ca_proppser_info b ON b.PROPPSER_ID = a.PROPPSER_ID
+        LEFT JOIN ca_car_info c ON a.CAR_ID = c.CAR_ID
+        LEFT JOIN ca_gps_flow f ON f.app_code = a.APP_CODE
+        WHERE
+        <if test="form.approvalUserId != null and form.approvalUserId !=''">
+           f.approval_user_id = #{form.approvalUserId}
+        </if>
+        <if test="form.excludeStatusScope != null and form.excludeStatusScope.size > 0">
+            and a.status not in
+            <foreach collection="form.excludeStatusScope" item="item" index="index" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+        </if>
+        AND a.is_Gps ='2'  and a.R_GPS_FEE > 0 and a.manage_Approval_Time IS NOT NULL
+    </select>
+
+</mapper>

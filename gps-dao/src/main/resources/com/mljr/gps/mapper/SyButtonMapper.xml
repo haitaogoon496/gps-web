@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mljr.gps.mapper.SyButtonMapper" >
+  <resultMap id="BaseResultMap" type="com.mljr.gps.entity.SyButton" >
+    <id column="BUTTON_ID" property="buttonId" jdbcType="INTEGER" />
+    <result column="BUTTON_TITLE" property="buttonTitle" jdbcType="VARCHAR" />
+    <result column="BUTTON_LOCATION" property="buttonLocation" jdbcType="VARCHAR" />
+    <result column="BUTTON_INDEX" property="buttonIndex" jdbcType="BIGINT" />
+    <result column="ITEM_ID" property="itemId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    BUTTON_ID, BUTTON_TITLE, BUTTON_LOCATION, BUTTON_INDEX, ITEM_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sy_button
+    where BUTTON_ID = #{buttonId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectButtonsByRoles" resultMap="BaseResultMap" parameterType="java.util.List">
+    select a.* from sy_button a join sy_role_button b on a.button_id = b.button_id
+    <where>
+      <if test="list != null ">
+        and b.role_id in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+          #{item}
+        </foreach>
+      </if>
+    </where>
+
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sy_button
+    where BUTTON_ID = #{buttonId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mljr.gps.entity.SyButton" >
+    insert into sy_button (BUTTON_ID, BUTTON_TITLE, BUTTON_LOCATION, 
+      BUTTON_INDEX, ITEM_ID)
+    values (#{buttonId,jdbcType=INTEGER}, #{buttonTitle,jdbcType=VARCHAR}, #{buttonLocation,jdbcType=VARCHAR}, 
+      #{buttonIndex,jdbcType=BIGINT}, #{itemId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mljr.gps.entity.SyButton" >
+    insert into sy_button
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="buttonId != null" >
+        BUTTON_ID,
+      </if>
+      <if test="buttonTitle != null" >
+        BUTTON_TITLE,
+      </if>
+      <if test="buttonLocation != null" >
+        BUTTON_LOCATION,
+      </if>
+      <if test="buttonIndex != null" >
+        BUTTON_INDEX,
+      </if>
+      <if test="itemId != null" >
+        ITEM_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="buttonId != null" >
+        #{buttonId,jdbcType=INTEGER},
+      </if>
+      <if test="buttonTitle != null" >
+        #{buttonTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonLocation != null" >
+        #{buttonLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonIndex != null" >
+        #{buttonIndex,jdbcType=BIGINT},
+      </if>
+      <if test="itemId != null" >
+        #{itemId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mljr.gps.entity.SyButton" >
+    update sy_button
+    <set >
+      <if test="buttonTitle != null" >
+        BUTTON_TITLE = #{buttonTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonLocation != null" >
+        BUTTON_LOCATION = #{buttonLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonIndex != null" >
+        BUTTON_INDEX = #{buttonIndex,jdbcType=BIGINT},
+      </if>
+      <if test="itemId != null" >
+        ITEM_ID = #{itemId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BUTTON_ID = #{buttonId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mljr.gps.entity.SyButton" >
+    update sy_button
+    set BUTTON_TITLE = #{buttonTitle,jdbcType=VARCHAR},
+      BUTTON_LOCATION = #{buttonLocation,jdbcType=VARCHAR},
+      BUTTON_INDEX = #{buttonIndex,jdbcType=BIGINT},
+      ITEM_ID = #{itemId,jdbcType=VARCHAR}
+    where BUTTON_ID = #{buttonId,jdbcType=INTEGER}
+  </update>
+</mapper>

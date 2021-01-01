@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mljr.gps.mapper.SyRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.mljr.gps.entity.SyRole" >
+    <id column="ROLE_ID" property="roleId" jdbcType="INTEGER" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="role_type" property="roleType" jdbcType="INTEGER" />
+    <result column="role_desc" property="roleDesc" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="valid_falg" property="validFalg" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ROLE_ID, role_name, role_type, role_desc, update_time, create_time, valid_falg
+  </sql>
+
+
+  <sql id="queryCondition">
+    <where>
+      <if test="form != null " >
+        <if test="form.roleName != null">
+          and role_name LIKE CONCAT('%',#{form.roleName},'%')
+        </if>
+      </if>
+    </where>
+  </sql>
+
+  <sql id="queryWhere">
+    <where>
+      <if test="userId != null">
+        and u.user_id=#{userId}
+      </if>
+      <if test="roleName != null">
+        and r.role_name=#{roleName}
+      </if>
+    </where>
+  </sql>
+
+  <select id="pageQuery" resultMap="BaseResultMap"  parameterType="com.lyqc.base.page.PageForm">
+    select
+    <include refid="Base_Column_List" />
+    from sy_role
+    <include refid="queryCondition"/>
+    limit #{limit} offset #{start}
+  </select>
+
+  <select id="queryCount" resultType="int" parameterType="com.lyqc.base.page.PageForm">
+    select COUNT(1) from sy_role <include refid="queryCondition"/>
+  </select>
+
+  <select id="queryList" resultType="com.mljr.gps.entity.SyRole" parameterType="com.mljr.gps.form.SyRoleForm">
+    select
+    u.user_id as userId,
+    r.role_id as roleId,
+    r.role_name as roleName,
+    r.role_type as roleType
+    from sy_role r join sy_user_role u on r.role_id = u.role_id
+    <include refid="queryWhere"/>
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sy_role
+    where ROLE_ID = #{roleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sy_role
+    where ROLE_ID = #{roleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mljr.gps.entity.SyRole" useGeneratedKeys="true" keyProperty="roleId">
+    insert into sy_role (ROLE_ID, role_name, role_type, 
+      role_desc, update_time, create_time, 
+      valid_falg)
+    values (#{roleId,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{roleType,jdbcType=INTEGER}, 
+      #{roleDesc,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{validFalg,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mljr.gps.entity.SyRole" useGeneratedKeys="true" keyProperty="roleId">
+    insert into sy_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        ROLE_ID,
+      </if>
+      <if test="roleName != null" >
+        role_name,
+      </if>
+      <if test="roleType != null" >
+        role_type,
+      </if>
+      <if test="roleDesc != null" >
+        role_desc,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="validFalg != null" >
+        valid_falg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleType != null" >
+        #{roleType,jdbcType=INTEGER},
+      </if>
+      <if test="roleDesc != null" >
+        #{roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validFalg != null" >
+        #{validFalg,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mljr.gps.entity.SyRole" >
+    update sy_role
+    <set >
+      <if test="roleName != null" >
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleType != null" >
+        role_type = #{roleType,jdbcType=INTEGER},
+      </if>
+      <if test="roleDesc != null" >
+        role_desc = #{roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validFalg != null" >
+        valid_falg = #{validFalg,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ROLE_ID = #{roleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mljr.gps.entity.SyRole" >
+    update sy_role
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      role_type = #{roleType,jdbcType=INTEGER},
+      role_desc = #{roleDesc,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      valid_falg = #{validFalg,jdbcType=BIGINT}
+    where ROLE_ID = #{roleId,jdbcType=INTEGER}
+  </update>
+</mapper>

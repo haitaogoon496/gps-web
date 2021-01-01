@@ -1,0 +1,1065 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mljr.gps.mapper.ProppserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.mljr.gps.entity.ProppserInfo" >
+    <id column="PROPPSER_ID" property="proppserId" jdbcType="INTEGER" />
+    <result column="ID_TYPE" property="idType" jdbcType="CHAR" />
+    <result column="IDNO" property="idno" jdbcType="VARCHAR" />
+    <result column="PROPPSER_NAME" property="proppserName" jdbcType="VARCHAR" />
+    <result column="PSW" property="psw" jdbcType="VARCHAR" />
+    <result column="BIRTH" property="birth" jdbcType="CHAR" />
+    <result column="SEX" property="sex" jdbcType="CHAR" />
+    <result column="MARRIAGE" property="marriage" jdbcType="CHAR" />
+    <result column="EDUCATION" property="education" jdbcType="CHAR" />
+    <result column="PROVINCE" property="province" jdbcType="VARCHAR" />
+    <result column="DISTRICT" property="district" jdbcType="VARCHAR" />
+    <result column="CITY" property="city" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="NOW_PROVINCE" property="nowProvince" jdbcType="VARCHAR" />
+    <result column="NOW_CITY" property="nowCity" jdbcType="VARCHAR" />
+    <result column="NOW_DISTRICT" property="nowDistrict" jdbcType="VARCHAR" />
+    <result column="NOW_ADDRESS" property="nowAddress" jdbcType="VARCHAR" />
+    <result column="NOW_POSTALCODE" property="nowPostalcode" jdbcType="VARCHAR" />
+    <result column="NOW_TEL" property="nowTel" jdbcType="VARCHAR" />
+    <result column="NOW_LIVING_TIME" property="nowLivingTime" jdbcType="TINYINT" />
+    <result column="FIRST_WORK_TIME" property="firstWorkTime" jdbcType="DATE" />
+    <result column="NOW_INDUSTRY" property="nowIndustry" jdbcType="VARCHAR" />
+    <result column="NOW_POSITION" property="nowPosition" jdbcType="VARCHAR" />
+    <result column="INCOME_SOURCE" property="incomeSource" jdbcType="VARCHAR" />
+    <result column="INCOME_MONTH" property="incomeMonth" jdbcType="DECIMAL" />
+    <result column="INCOME_OTH" property="incomeOth" jdbcType="DECIMAL" />
+    <result column="NOW_COMPANY" property="nowCompany" jdbcType="VARCHAR" />
+    <result column="NOW_UNIT_KIND" property="nowUnitKind" jdbcType="VARCHAR" />
+    <result column="NOW_UNIT_PROVINCE" property="nowUnitProvince" jdbcType="VARCHAR" />
+    <result column="NOW_UNIT_CITY" property="nowUnitCity" jdbcType="VARCHAR" />
+    <result column="NOW_UNIT_ADDRESS" property="nowUnitAddress" jdbcType="VARCHAR" />
+    <result column="NOW_UNIT_SCALE" property="nowUnitScale" jdbcType="SMALLINT" />
+    <result column="NOW_UNIT_TEL" property="nowUnitTel" jdbcType="VARCHAR" />
+    <result column="NOW_UNIT_POSTALCODE" property="nowUnitPostalcode" jdbcType="VARCHAR" />
+    <result column="IS_DRIVER_LICENSE" property="isDriverLicense" jdbcType="CHAR" />
+    <result column="FIRST_DRIVER_NO" property="firstDriverNo" jdbcType="VARCHAR" />
+    <result column="DRIVER_NAME" property="driverName" jdbcType="VARCHAR" />
+    <result column="DRIVER_NO" property="driverNo" jdbcType="VARCHAR" />
+    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="RELATION_E_CONTACT" property="relationEContact" jdbcType="VARCHAR" />
+    <result column="E_CONTACT_MOBILE" property="eContactMobile" jdbcType="VARCHAR" />
+    <result column="E_CONTACT" property="eContact" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="CHAR" />
+    <result column="REMAKES" property="remakes" jdbcType="VARCHAR" />
+    <result column="IS_ASSURE" property="isAssure" jdbcType="VARCHAR" />
+    <result column="HOUSE_OWNER" property="houseOwner" jdbcType="VARCHAR" />
+    <result column="RELATION_D_FL" property="relationDFl" jdbcType="VARCHAR" />
+    <result column="CREDIT_RECORDS" property="creditRecords" jdbcType="VARCHAR" />
+    <result column="MOBILES" property="mobiles" jdbcType="VARCHAR" />
+    <result column="RELATION_E_CONTACTS" property="relationEContacts" jdbcType="VARCHAR" />
+    <result column="E_CONTACTS_MOBILE" property="eContactsMobile" jdbcType="VARCHAR" />
+    <result column="E_CONTACTS" property="eContacts" jdbcType="VARCHAR" />
+    <result column="IS_JXL_REPORT" property="isJxlReport" jdbcType="VARCHAR" />
+    <result column="driver_type" property="driverType" jdbcType="VARCHAR" />
+    <result column="now_work_year" property="nowWorkYear" jdbcType="VARCHAR" />
+    <result column="BANK_CARD_TYPE" property="bankCardType" jdbcType="VARCHAR" />
+    <result column="BANK_CARD_NO" property="bankCardNo" jdbcType="VARCHAR" />
+    <result column="IS_PRINT_BOOK" property="isPrintBook" jdbcType="VARCHAR" />
+    <!--<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />-->
+    <result column="MARKETER_CODE" property="marketerCode" jdbcType="VARCHAR" />
+    <result column="CARD_PRODUCT_CODE" property="cardProductCode" jdbcType="VARCHAR" />
+    <result column="CARD_PRODUCT_NAME" property="cardProductName" jdbcType="VARCHAR" />
+    <result column="CITY_CODE_STR" property="cityCodeStr" jdbcType="VARCHAR" />
+    <result column="COURT" property="court" jdbcType="VARCHAR" />
+    <result column="period_of_validity" property="periodOfValidity" jdbcType="VARCHAR" />
+    <result column="IS_CERT_ALL" property="isCertAll" jdbcType="CHAR" />
+    <result column="IS_SCENE" property="isScene" jdbcType="CHAR" />
+    <result column="reference_code" property="referenceCode" jdbcType="VARCHAR" />
+    <result column="reference_jgcode" property="referenceJgcode" jdbcType="VARCHAR" />
+    <result column="applicationagreementbarcode" property="applicationagreementbarcode" jdbcType="VARCHAR" />
+    <result column="residence_nature" property="residenceNature" jdbcType="VARCHAR" />
+    <result column="now_district_code" property="nowDistrictCode" jdbcType="VARCHAR" />
+    <result column="now_unit_district_code" property="nowUnitDistrictCode" jdbcType="VARCHAR" />
+    <result column="now_unit_district" property="nowUnitDistrict" jdbcType="VARCHAR" />
+    <result column="id_card_valid_start_date" property="idCardValidStartDate" jdbcType="DATE" />
+    <result column="id_card_valid_end_date" property="idCardValidEndDate" jdbcType="DATE" />
+    <result column="PROVINCE_CODE" property="provinceCode" jdbcType="VARCHAR" />
+    <result column="CITY_CODE" property="cityCode" jdbcType="VARCHAR" />
+    <result column="DISTRICT_CODE" property="districtCode" jdbcType="VARCHAR" />
+    <result column="NOW_PROVINCE_CODE" property="nowProvinceCode" jdbcType="VARCHAR" />
+    <result column="NOW_CITY_CODE" property="nowCityCode" jdbcType="VARCHAR" />
+    <result column="now_unit_province_code" property="nowUnitProvinceCode" jdbcType="VARCHAR" />
+    <result column="now_unit_city_code" property="nowUnitCityCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PROPPSER_ID, ID_TYPE, IDNO, PROPPSER_NAME, PSW, BIRTH, SEX, MARRIAGE, EDUCATION, 
+    PROVINCE, DISTRICT, CITY, ADDRESS, NOW_PROVINCE, NOW_CITY, NOW_DISTRICT, NOW_ADDRESS, 
+    NOW_POSTALCODE, NOW_TEL, NOW_LIVING_TIME, FIRST_WORK_TIME, NOW_INDUSTRY, NOW_POSITION, 
+    INCOME_SOURCE, INCOME_MONTH, INCOME_OTH, NOW_COMPANY, NOW_UNIT_KIND, NOW_UNIT_PROVINCE, 
+    NOW_UNIT_CITY, NOW_UNIT_ADDRESS, NOW_UNIT_SCALE, NOW_UNIT_TEL, NOW_UNIT_POSTALCODE, 
+    IS_DRIVER_LICENSE, FIRST_DRIVER_NO, DRIVER_NAME, DRIVER_NO, MOBILE, EMAIL, RELATION_E_CONTACT, 
+    E_CONTACT_MOBILE, E_CONTACT, STATUS, REMAKES, IS_ASSURE, HOUSE_OWNER, RELATION_D_FL, 
+    CREDIT_RECORDS, MOBILES, RELATION_E_CONTACTS, E_CONTACTS_MOBILE, E_CONTACTS, IS_JXL_REPORT, 
+    driver_type, now_work_year, BANK_CARD_TYPE, BANK_CARD_NO, IS_PRINT_BOOK, UPDATE_TIME, 
+    MARKETER_CODE, CARD_PRODUCT_CODE, CARD_PRODUCT_NAME, CITY_CODE_STR, COURT, period_of_validity, 
+    IS_CERT_ALL, IS_SCENE, reference_code, reference_jgcode, applicationagreementbarcode, 
+    residence_nature, now_district_code, now_unit_district_code, now_unit_district, id_card_valid_start_date, 
+    id_card_valid_end_date, PROVINCE_CODE, CITY_CODE, DISTRICT_CODE, NOW_PROVINCE_CODE, 
+    NOW_CITY_CODE, now_unit_province_code, now_unit_city_code
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ca_proppser_info
+    where PROPPSER_ID = #{proppserId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ca_proppser_info
+    where PROPPSER_ID = #{proppserId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mljr.gps.entity.ProppserInfo" >
+    insert into ca_proppser_info (PROPPSER_ID, ID_TYPE, IDNO, 
+      PROPPSER_NAME, PSW, BIRTH, 
+      SEX, MARRIAGE, EDUCATION, PROVINCE, 
+      DISTRICT, CITY, ADDRESS, 
+      NOW_PROVINCE, NOW_CITY, NOW_DISTRICT, 
+      NOW_ADDRESS, NOW_POSTALCODE, NOW_TEL, 
+      NOW_LIVING_TIME, FIRST_WORK_TIME, NOW_INDUSTRY, 
+      NOW_POSITION, INCOME_SOURCE, INCOME_MONTH, 
+      INCOME_OTH, NOW_COMPANY, NOW_UNIT_KIND, 
+      NOW_UNIT_PROVINCE, NOW_UNIT_CITY, NOW_UNIT_ADDRESS, 
+      NOW_UNIT_SCALE, NOW_UNIT_TEL, NOW_UNIT_POSTALCODE, 
+      IS_DRIVER_LICENSE, FIRST_DRIVER_NO, DRIVER_NAME, 
+      DRIVER_NO, MOBILE, EMAIL, 
+      RELATION_E_CONTACT, E_CONTACT_MOBILE, E_CONTACT, 
+      STATUS, REMAKES, IS_ASSURE, 
+      HOUSE_OWNER, RELATION_D_FL, CREDIT_RECORDS, 
+      MOBILES, RELATION_E_CONTACTS, E_CONTACTS_MOBILE, 
+      E_CONTACTS, IS_JXL_REPORT, driver_type, 
+      now_work_year, BANK_CARD_TYPE, BANK_CARD_NO, 
+      IS_PRINT_BOOK, UPDATE_TIME, MARKETER_CODE, 
+      CARD_PRODUCT_CODE, CARD_PRODUCT_NAME, CITY_CODE_STR, 
+      COURT, period_of_validity, IS_CERT_ALL, 
+      IS_SCENE, reference_code, reference_jgcode, 
+      applicationagreementbarcode, residence_nature, 
+      now_district_code, now_unit_district_code, now_unit_district, 
+      id_card_valid_start_date, id_card_valid_end_date, PROVINCE_CODE, 
+      CITY_CODE, DISTRICT_CODE, NOW_PROVINCE_CODE, 
+      NOW_CITY_CODE, now_unit_province_code, now_unit_city_code
+      )
+    values (#{proppserId,jdbcType=INTEGER}, #{idType,jdbcType=CHAR}, #{idno,jdbcType=VARCHAR}, 
+      #{proppserName,jdbcType=VARCHAR}, #{psw,jdbcType=VARCHAR}, #{birth,jdbcType=CHAR}, 
+      #{sex,jdbcType=CHAR}, #{marriage,jdbcType=CHAR}, #{education,jdbcType=CHAR}, #{province,jdbcType=VARCHAR}, 
+      #{district,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{nowProvince,jdbcType=VARCHAR}, #{nowCity,jdbcType=VARCHAR}, #{nowDistrict,jdbcType=VARCHAR}, 
+      #{nowAddress,jdbcType=VARCHAR}, #{nowPostalcode,jdbcType=VARCHAR}, #{nowTel,jdbcType=VARCHAR}, 
+      #{nowLivingTime,jdbcType=TINYINT}, #{firstWorkTime,jdbcType=DATE}, #{nowIndustry,jdbcType=VARCHAR}, 
+      #{nowPosition,jdbcType=VARCHAR}, #{incomeSource,jdbcType=VARCHAR}, #{incomeMonth,jdbcType=DECIMAL}, 
+      #{incomeOth,jdbcType=DECIMAL}, #{nowCompany,jdbcType=VARCHAR}, #{nowUnitKind,jdbcType=VARCHAR}, 
+      #{nowUnitProvince,jdbcType=VARCHAR}, #{nowUnitCity,jdbcType=VARCHAR}, #{nowUnitAddress,jdbcType=VARCHAR}, 
+      #{nowUnitScale,jdbcType=SMALLINT}, #{nowUnitTel,jdbcType=VARCHAR}, #{nowUnitPostalcode,jdbcType=VARCHAR}, 
+      #{isDriverLicense,jdbcType=CHAR}, #{firstDriverNo,jdbcType=VARCHAR}, #{driverName,jdbcType=VARCHAR}, 
+      #{driverNo,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{relationEContact,jdbcType=VARCHAR}, #{eContactMobile,jdbcType=VARCHAR}, #{eContact,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{remakes,jdbcType=VARCHAR}, #{isAssure,jdbcType=VARCHAR}, 
+      #{houseOwner,jdbcType=VARCHAR}, #{relationDFl,jdbcType=VARCHAR}, #{creditRecords,jdbcType=VARCHAR}, 
+      #{mobiles,jdbcType=VARCHAR}, #{relationEContacts,jdbcType=VARCHAR}, #{eContactsMobile,jdbcType=VARCHAR}, 
+      #{eContacts,jdbcType=VARCHAR}, #{isJxlReport,jdbcType=VARCHAR}, #{driverType,jdbcType=VARCHAR}, 
+      #{nowWorkYear,jdbcType=VARCHAR}, #{bankCardType,jdbcType=VARCHAR}, #{bankCardNo,jdbcType=VARCHAR}, 
+      #{isPrintBook,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{marketerCode,jdbcType=VARCHAR}, 
+      #{cardProductCode,jdbcType=VARCHAR}, #{cardProductName,jdbcType=VARCHAR}, #{cityCodeStr,jdbcType=VARCHAR}, 
+      #{court,jdbcType=VARCHAR}, #{periodOfValidity,jdbcType=VARCHAR}, #{isCertAll,jdbcType=CHAR}, 
+      #{isScene,jdbcType=CHAR}, #{referenceCode,jdbcType=VARCHAR}, #{referenceJgcode,jdbcType=VARCHAR}, 
+      #{applicationagreementbarcode,jdbcType=VARCHAR}, #{residenceNature,jdbcType=VARCHAR}, 
+      #{nowDistrictCode,jdbcType=VARCHAR}, #{nowUnitDistrictCode,jdbcType=VARCHAR}, #{nowUnitDistrict,jdbcType=VARCHAR}, 
+      #{idCardValidStartDate,jdbcType=DATE}, #{idCardValidEndDate,jdbcType=DATE}, #{provinceCode,jdbcType=VARCHAR}, 
+      #{cityCode,jdbcType=VARCHAR}, #{districtCode,jdbcType=VARCHAR}, #{nowProvinceCode,jdbcType=VARCHAR}, 
+      #{nowCityCode,jdbcType=VARCHAR}, #{nowUnitProvinceCode,jdbcType=VARCHAR}, #{nowUnitCityCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mljr.gps.entity.ProppserInfo" >
+    insert into ca_proppser_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="proppserId != null" >
+        PROPPSER_ID,
+      </if>
+      <if test="idType != null" >
+        ID_TYPE,
+      </if>
+      <if test="idno != null" >
+        IDNO,
+      </if>
+      <if test="proppserName != null" >
+        PROPPSER_NAME,
+      </if>
+      <if test="psw != null" >
+        PSW,
+      </if>
+      <if test="birth != null" >
+        BIRTH,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="marriage != null" >
+        MARRIAGE,
+      </if>
+      <if test="education != null" >
+        EDUCATION,
+      </if>
+      <if test="province != null" >
+        PROVINCE,
+      </if>
+      <if test="district != null" >
+        DISTRICT,
+      </if>
+      <if test="city != null" >
+        CITY,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="nowProvince != null" >
+        NOW_PROVINCE,
+      </if>
+      <if test="nowCity != null" >
+        NOW_CITY,
+      </if>
+      <if test="nowDistrict != null" >
+        NOW_DISTRICT,
+      </if>
+      <if test="nowAddress != null" >
+        NOW_ADDRESS,
+      </if>
+      <if test="nowPostalcode != null" >
+        NOW_POSTALCODE,
+      </if>
+      <if test="nowTel != null" >
+        NOW_TEL,
+      </if>
+      <if test="nowLivingTime != null" >
+        NOW_LIVING_TIME,
+      </if>
+      <if test="firstWorkTime != null" >
+        FIRST_WORK_TIME,
+      </if>
+      <if test="nowIndustry != null" >
+        NOW_INDUSTRY,
+      </if>
+      <if test="nowPosition != null" >
+        NOW_POSITION,
+      </if>
+      <if test="incomeSource != null" >
+        INCOME_SOURCE,
+      </if>
+      <if test="incomeMonth != null" >
+        INCOME_MONTH,
+      </if>
+      <if test="incomeOth != null" >
+        INCOME_OTH,
+      </if>
+      <if test="nowCompany != null" >
+        NOW_COMPANY,
+      </if>
+      <if test="nowUnitKind != null" >
+        NOW_UNIT_KIND,
+      </if>
+      <if test="nowUnitProvince != null" >
+        NOW_UNIT_PROVINCE,
+      </if>
+      <if test="nowUnitCity != null" >
+        NOW_UNIT_CITY,
+      </if>
+      <if test="nowUnitAddress != null" >
+        NOW_UNIT_ADDRESS,
+      </if>
+      <if test="nowUnitScale != null" >
+        NOW_UNIT_SCALE,
+      </if>
+      <if test="nowUnitTel != null" >
+        NOW_UNIT_TEL,
+      </if>
+      <if test="nowUnitPostalcode != null" >
+        NOW_UNIT_POSTALCODE,
+      </if>
+      <if test="isDriverLicense != null" >
+        IS_DRIVER_LICENSE,
+      </if>
+      <if test="firstDriverNo != null" >
+        FIRST_DRIVER_NO,
+      </if>
+      <if test="driverName != null" >
+        DRIVER_NAME,
+      </if>
+      <if test="driverNo != null" >
+        DRIVER_NO,
+      </if>
+      <if test="mobile != null" >
+        MOBILE,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="relationEContact != null" >
+        RELATION_E_CONTACT,
+      </if>
+      <if test="eContactMobile != null" >
+        E_CONTACT_MOBILE,
+      </if>
+      <if test="eContact != null" >
+        E_CONTACT,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="remakes != null" >
+        REMAKES,
+      </if>
+      <if test="isAssure != null" >
+        IS_ASSURE,
+      </if>
+      <if test="houseOwner != null" >
+        HOUSE_OWNER,
+      </if>
+      <if test="relationDFl != null" >
+        RELATION_D_FL,
+      </if>
+      <if test="creditRecords != null" >
+        CREDIT_RECORDS,
+      </if>
+      <if test="mobiles != null" >
+        MOBILES,
+      </if>
+      <if test="relationEContacts != null" >
+        RELATION_E_CONTACTS,
+      </if>
+      <if test="eContactsMobile != null" >
+        E_CONTACTS_MOBILE,
+      </if>
+      <if test="eContacts != null" >
+        E_CONTACTS,
+      </if>
+      <if test="isJxlReport != null" >
+        IS_JXL_REPORT,
+      </if>
+      <if test="driverType != null" >
+        driver_type,
+      </if>
+      <if test="nowWorkYear != null" >
+        now_work_year,
+      </if>
+      <if test="bankCardType != null" >
+        BANK_CARD_TYPE,
+      </if>
+      <if test="bankCardNo != null" >
+        BANK_CARD_NO,
+      </if>
+      <if test="isPrintBook != null" >
+        IS_PRINT_BOOK,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="marketerCode != null" >
+        MARKETER_CODE,
+      </if>
+      <if test="cardProductCode != null" >
+        CARD_PRODUCT_CODE,
+      </if>
+      <if test="cardProductName != null" >
+        CARD_PRODUCT_NAME,
+      </if>
+      <if test="cityCodeStr != null" >
+        CITY_CODE_STR,
+      </if>
+      <if test="court != null" >
+        COURT,
+      </if>
+      <if test="periodOfValidity != null" >
+        period_of_validity,
+      </if>
+      <if test="isCertAll != null" >
+        IS_CERT_ALL,
+      </if>
+      <if test="isScene != null" >
+        IS_SCENE,
+      </if>
+      <if test="referenceCode != null" >
+        reference_code,
+      </if>
+      <if test="referenceJgcode != null" >
+        reference_jgcode,
+      </if>
+      <if test="applicationagreementbarcode != null" >
+        applicationagreementbarcode,
+      </if>
+      <if test="residenceNature != null" >
+        residence_nature,
+      </if>
+      <if test="nowDistrictCode != null" >
+        now_district_code,
+      </if>
+      <if test="nowUnitDistrictCode != null" >
+        now_unit_district_code,
+      </if>
+      <if test="nowUnitDistrict != null" >
+        now_unit_district,
+      </if>
+      <if test="idCardValidStartDate != null" >
+        id_card_valid_start_date,
+      </if>
+      <if test="idCardValidEndDate != null" >
+        id_card_valid_end_date,
+      </if>
+      <if test="provinceCode != null" >
+        PROVINCE_CODE,
+      </if>
+      <if test="cityCode != null" >
+        CITY_CODE,
+      </if>
+      <if test="districtCode != null" >
+        DISTRICT_CODE,
+      </if>
+      <if test="nowProvinceCode != null" >
+        NOW_PROVINCE_CODE,
+      </if>
+      <if test="nowCityCode != null" >
+        NOW_CITY_CODE,
+      </if>
+      <if test="nowUnitProvinceCode != null" >
+        now_unit_province_code,
+      </if>
+      <if test="nowUnitCityCode != null" >
+        now_unit_city_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="proppserId != null" >
+        #{proppserId,jdbcType=INTEGER},
+      </if>
+      <if test="idType != null" >
+        #{idType,jdbcType=CHAR},
+      </if>
+      <if test="idno != null" >
+        #{idno,jdbcType=VARCHAR},
+      </if>
+      <if test="proppserName != null" >
+        #{proppserName,jdbcType=VARCHAR},
+      </if>
+      <if test="psw != null" >
+        #{psw,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null" >
+        #{birth,jdbcType=CHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="marriage != null" >
+        #{marriage,jdbcType=CHAR},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=CHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="nowProvince != null" >
+        #{nowProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="nowCity != null" >
+        #{nowCity,jdbcType=VARCHAR},
+      </if>
+      <if test="nowDistrict != null" >
+        #{nowDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="nowAddress != null" >
+        #{nowAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="nowPostalcode != null" >
+        #{nowPostalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="nowTel != null" >
+        #{nowTel,jdbcType=VARCHAR},
+      </if>
+      <if test="nowLivingTime != null" >
+        #{nowLivingTime,jdbcType=TINYINT},
+      </if>
+      <if test="firstWorkTime != null" >
+        #{firstWorkTime,jdbcType=DATE},
+      </if>
+      <if test="nowIndustry != null" >
+        #{nowIndustry,jdbcType=VARCHAR},
+      </if>
+      <if test="nowPosition != null" >
+        #{nowPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeSource != null" >
+        #{incomeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeMonth != null" >
+        #{incomeMonth,jdbcType=DECIMAL},
+      </if>
+      <if test="incomeOth != null" >
+        #{incomeOth,jdbcType=DECIMAL},
+      </if>
+      <if test="nowCompany != null" >
+        #{nowCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="nowUnitKind != null" >
+        #{nowUnitKind,jdbcType=VARCHAR},
+      </if>
+      <if test="nowUnitProvince != null" >
+        #{nowUnitProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="nowUnitCity != null" >
+        #{nowUnitCity,jdbcType=VARCHAR},
+      </if>
+      <if test="nowUnitAddress != null" >
+        #{nowUnitAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="nowUnitScale != null" >
+        #{nowUnitScale,jdbcType=SMALLINT},
+      </if>
+      <if test="nowUnitTel != null" >
+        #{nowUnitTel,jdbcType=VARCHAR},
+      </if>
+      <if test="nowUnitPostalcode != null" >
+        #{nowUnitPostalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="isDriverLicense != null" >
+        #{isDriverLicense,jdbcType=CHAR},
+      </if>
+      <if test="firstDriverNo != null" >
+        #{firstDriverNo,jdbcType=VARCHAR},
+      </if>
+      <if test="driverName != null" >
+        #{driverName,jdbcType=VARCHAR},
+      </if>
+      <if test="driverNo != null" >
+        #{driverNo,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="relationEContact != null" >
+        #{relationEContact,jdbcType=VARCHAR},
+      </if>
+      <if test="eContactMobile != null" >
+        #{eContactMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="eContact != null" >
+        #{eContact,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="remakes != null" >
+        #{remakes,jdbcType=VARCHAR},
+      </if>
+      <if test="isAssure != null" >
+        #{isAssure,jdbcType=VARCHAR},
+      </if>
+      <if test="houseOwner != null" >
+        #{houseOwner,jdbcType=VARCHAR},
+      </if>
+      <if test="relationDFl != null" >
+        #{relationDFl,jdbcType=VARCHAR},
+      </if>
+      <if test="creditRecords != null" >
+        #{creditRecords,jdbcType=VARCHAR},
+      </if>
+      <if test="mobiles != null" >
+        #{mobiles,jdbcType=VARCHAR},
+      </if>
+      <if test="relationEContacts != null" >
+        #{relationEContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="eContactsMobile != null" >
+        #{eContactsMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="eContacts != null" >
+        #{eContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="isJxlReport != null" >
+        #{isJxlReport,jdbcType=VARCHAR},
+      </if>
+      <if test="driverType != null" >
+        #{driverType,jdbcType=VARCHAR},
+      </if>
+      <if test="nowWorkYear != null" >
+        #{nowWorkYear,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCardType != null" >
+        #{bankCardType,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCardNo != null" >
+        #{bankCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isPrintBook != null" >
+        #{isPrintBook,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="marketerCode != null" >
+        #{marketerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cardProductCode != null" >
+        #{cardProductCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cardProductName != null" >
+        #{cardProductName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCodeStr != null" >
+        #{cityCodeStr,jdbcType=VARCHAR},
+      </if>
+      <if test="court != null" >
+        #{court,jdbcType=VARCHAR},
+      </if>
+      <if test="periodOfValidity != null" >
+        #{periodOfValidity,jdbcType=VARCHAR},
+      </if>
+      <if test="isCertAll != null" >
+        #{isCertAll,jdbcType=CHAR},
+      </if>
+      <if test="isScene != null" >
+        #{isScene,jdbcType=CHAR},
+      </if>
+      <if test="referenceCode != null" >
+        #{referenceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="referenceJgcode != null" >
+        #{referenceJgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationagreementbarcode != null" >
+        #{applicationagreementbarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="residenceNature != null" >
+        #{residenceNature,jdbcType=VARCHAR},
+      </if>
+      <if test="nowDistrictCode != null" >
+        #{nowDistrictCode,jdbcType=VARCHAR},
+      </if>
+      <if test="nowUnitDistrictCode != null" >
+        #{nowUnitDistrictCode,jdbcType=VARCHAR},
+      </if>
+      <if test="nowUnitDistrict != null" >
+        #{nowUnitDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardValidStartDate != null" >
+        #{idCardValidStartDate,jdbcType=DATE},
+      </if>
+      <if test="idCardValidEndDate != null" >
+        #{idCardValidEndDate,jdbcType=DATE},
+      </if>
+      <if test="provinceCode != null" >
+        #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="districtCode != null" >
+        #{districtCode,jdbcType=VARCHAR},
+      </if>
+      <if test="nowProvinceCode != null" >
+        #{nowProvinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="nowCityCode != null" >
+        #{nowCityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="nowUnitProvinceCode != null" >
+        #{nowUnitProvinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="nowUnitCityCode != null" >
+        #{nowUnitCityCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mljr.gps.entity.ProppserInfo" >
+    update ca_proppser_info
+    <set >
+      <if test="idType != null" >
+        ID_TYPE = #{idType,jdbcType=CHAR},
+      </if>
+      <if test="idno != null" >
+        IDNO = #{idno,jdbcType=VARCHAR},
+      </if>
+      <if test="proppserName != null" >
+        PROPPSER_NAME = #{proppserName,jdbcType=VARCHAR},
+      </if>
+      <if test="psw != null" >
+        PSW = #{psw,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null" >
+        BIRTH = #{birth,jdbcType=CHAR},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="marriage != null" >
+        MARRIAGE = #{marriage,jdbcType=CHAR},
+      </if>
+      <if test="education != null" >
+        EDUCATION = #{education,jdbcType=CHAR},
+      </if>
+      <if test="province != null" >
+        PROVINCE = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        DISTRICT = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="nowProvince != null" >
+        NOW_PROVINCE = #{nowProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="nowCity != null" >
+        NOW_CITY = #{nowCity,jdbcType=VARCHAR},
+      </if>
+      <if test="nowDistrict != null" >
+        NOW_DISTRICT = #{nowDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="nowAddress != null" >
+        NOW_ADDRESS = #{nowAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="nowPostalcode != null" >
+        NOW_POSTALCODE = #{nowPostalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="nowTel != null" >
+        NOW_TEL = #{nowTel,jdbcType=VARCHAR},
+      </if>
+      <if test="nowLivingTime != null" >
+        NOW_LIVING_TIME = #{nowLivingTime,jdbcType=TINYINT},
+      </if>
+      <if test="firstWorkTime != null" >
+        FIRST_WORK_TIME = #{firstWorkTime,jdbcType=DATE},
+      </if>
+      <if test="nowIndustry != null" >
+        NOW_INDUSTRY = #{nowIndustry,jdbcType=VARCHAR},
+      </if>
+      <if test="nowPosition != null" >
+        NOW_POSITION = #{nowPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeSource != null" >
+        INCOME_SOURCE = #{incomeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeMonth != null" >
+        INCOME_MONTH = #{incomeMonth,jdbcType=DECIMAL},
+      </if>
+      <if test="incomeOth != null" >
+        INCOME_OTH = #{incomeOth,jdbcType=DECIMAL},
+      </if>
+      <if test="nowCompany != null" >
+        NOW_COMPANY = #{nowCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="nowUnitKind != null" >
+        NOW_UNIT_KIND = #{nowUnitKind,jdbcType=VARCHAR},
+      </if>
+      <if test="nowUnitProvince != null" >
+        NOW_UNIT_PROVINCE = #{nowUnitProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="nowUnitCity != null" >
+        NOW_UNIT_CITY = #{nowUnitCity,jdbcType=VARCHAR},
+      </if>
+      <if test="nowUnitAddress != null" >
+        NOW_UNIT_ADDRESS = #{nowUnitAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="nowUnitScale != null" >
+        NOW_UNIT_SCALE = #{nowUnitScale,jdbcType=SMALLINT},
+      </if>
+      <if test="nowUnitTel != null" >
+        NOW_UNIT_TEL = #{nowUnitTel,jdbcType=VARCHAR},
+      </if>
+      <if test="nowUnitPostalcode != null" >
+        NOW_UNIT_POSTALCODE = #{nowUnitPostalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="isDriverLicense != null" >
+        IS_DRIVER_LICENSE = #{isDriverLicense,jdbcType=CHAR},
+      </if>
+      <if test="firstDriverNo != null" >
+        FIRST_DRIVER_NO = #{firstDriverNo,jdbcType=VARCHAR},
+      </if>
+      <if test="driverName != null" >
+        DRIVER_NAME = #{driverName,jdbcType=VARCHAR},
+      </if>
+      <if test="driverNo != null" >
+        DRIVER_NO = #{driverNo,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="relationEContact != null" >
+        RELATION_E_CONTACT = #{relationEContact,jdbcType=VARCHAR},
+      </if>
+      <if test="eContactMobile != null" >
+        E_CONTACT_MOBILE = #{eContactMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="eContact != null" >
+        E_CONTACT = #{eContact,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=CHAR},
+      </if>
+      <if test="remakes != null" >
+        REMAKES = #{remakes,jdbcType=VARCHAR},
+      </if>
+      <if test="isAssure != null" >
+        IS_ASSURE = #{isAssure,jdbcType=VARCHAR},
+      </if>
+      <if test="houseOwner != null" >
+        HOUSE_OWNER = #{houseOwner,jdbcType=VARCHAR},
+      </if>
+      <if test="relationDFl != null" >
+        RELATION_D_FL = #{relationDFl,jdbcType=VARCHAR},
+      </if>
+      <if test="creditRecords != null" >
+        CREDIT_RECORDS = #{creditRecords,jdbcType=VARCHAR},
+      </if>
+      <if test="mobiles != null" >
+        MOBILES = #{mobiles,jdbcType=VARCHAR},
+      </if>
+      <if test="relationEContacts != null" >
+        RELATION_E_CONTACTS = #{relationEContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="eContactsMobile != null" >
+        E_CONTACTS_MOBILE = #{eContactsMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="eContacts != null" >
+        E_CONTACTS = #{eContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="isJxlReport != null" >
+        IS_JXL_REPORT = #{isJxlReport,jdbcType=VARCHAR},
+      </if>
+      <if test="driverType != null" >
+        driver_type = #{driverType,jdbcType=VARCHAR},
+      </if>
+      <if test="nowWorkYear != null" >
+        now_work_year = #{nowWorkYear,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCardType != null" >
+        BANK_CARD_TYPE = #{bankCardType,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCardNo != null" >
+        BANK_CARD_NO = #{bankCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isPrintBook != null" >
+        IS_PRINT_BOOK = #{isPrintBook,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="marketerCode != null" >
+        MARKETER_CODE = #{marketerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cardProductCode != null" >
+        CARD_PRODUCT_CODE = #{cardProductCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cardProductName != null" >
+        CARD_PRODUCT_NAME = #{cardProductName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCodeStr != null" >
+        CITY_CODE_STR = #{cityCodeStr,jdbcType=VARCHAR},
+      </if>
+      <if test="court != null" >
+        COURT = #{court,jdbcType=VARCHAR},
+      </if>
+      <if test="periodOfValidity != null" >
+        period_of_validity = #{periodOfValidity,jdbcType=VARCHAR},
+      </if>
+      <if test="isCertAll != null" >
+        IS_CERT_ALL = #{isCertAll,jdbcType=CHAR},
+      </if>
+      <if test="isScene != null" >
+        IS_SCENE = #{isScene,jdbcType=CHAR},
+      </if>
+      <if test="referenceCode != null" >
+        reference_code = #{referenceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="referenceJgcode != null" >
+        reference_jgcode = #{referenceJgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationagreementbarcode != null" >
+        applicationagreementbarcode = #{applicationagreementbarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="residenceNature != null" >
+        residence_nature = #{residenceNature,jdbcType=VARCHAR},
+      </if>
+      <if test="nowDistrictCode != null" >
+        now_district_code = #{nowDistrictCode,jdbcType=VARCHAR},
+      </if>
+      <if test="nowUnitDistrictCode != null" >
+        now_unit_district_code = #{nowUnitDistrictCode,jdbcType=VARCHAR},
+      </if>
+      <if test="nowUnitDistrict != null" >
+        now_unit_district = #{nowUnitDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardValidStartDate != null" >
+        id_card_valid_start_date = #{idCardValidStartDate,jdbcType=DATE},
+      </if>
+      <if test="idCardValidEndDate != null" >
+        id_card_valid_end_date = #{idCardValidEndDate,jdbcType=DATE},
+      </if>
+      <if test="provinceCode != null" >
+        PROVINCE_CODE = #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="districtCode != null" >
+        DISTRICT_CODE = #{districtCode,jdbcType=VARCHAR},
+      </if>
+      <if test="nowProvinceCode != null" >
+        NOW_PROVINCE_CODE = #{nowProvinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="nowCityCode != null" >
+        NOW_CITY_CODE = #{nowCityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="nowUnitProvinceCode != null" >
+        now_unit_province_code = #{nowUnitProvinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="nowUnitCityCode != null" >
+        now_unit_city_code = #{nowUnitCityCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PROPPSER_ID = #{proppserId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mljr.gps.entity.ProppserInfo" >
+    update ca_proppser_info
+    set ID_TYPE = #{idType,jdbcType=CHAR},
+      IDNO = #{idno,jdbcType=VARCHAR},
+      PROPPSER_NAME = #{proppserName,jdbcType=VARCHAR},
+      PSW = #{psw,jdbcType=VARCHAR},
+      BIRTH = #{birth,jdbcType=CHAR},
+      SEX = #{sex,jdbcType=CHAR},
+      MARRIAGE = #{marriage,jdbcType=CHAR},
+      EDUCATION = #{education,jdbcType=CHAR},
+      PROVINCE = #{province,jdbcType=VARCHAR},
+      DISTRICT = #{district,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      NOW_PROVINCE = #{nowProvince,jdbcType=VARCHAR},
+      NOW_CITY = #{nowCity,jdbcType=VARCHAR},
+      NOW_DISTRICT = #{nowDistrict,jdbcType=VARCHAR},
+      NOW_ADDRESS = #{nowAddress,jdbcType=VARCHAR},
+      NOW_POSTALCODE = #{nowPostalcode,jdbcType=VARCHAR},
+      NOW_TEL = #{nowTel,jdbcType=VARCHAR},
+      NOW_LIVING_TIME = #{nowLivingTime,jdbcType=TINYINT},
+      FIRST_WORK_TIME = #{firstWorkTime,jdbcType=DATE},
+      NOW_INDUSTRY = #{nowIndustry,jdbcType=VARCHAR},
+      NOW_POSITION = #{nowPosition,jdbcType=VARCHAR},
+      INCOME_SOURCE = #{incomeSource,jdbcType=VARCHAR},
+      INCOME_MONTH = #{incomeMonth,jdbcType=DECIMAL},
+      INCOME_OTH = #{incomeOth,jdbcType=DECIMAL},
+      NOW_COMPANY = #{nowCompany,jdbcType=VARCHAR},
+      NOW_UNIT_KIND = #{nowUnitKind,jdbcType=VARCHAR},
+      NOW_UNIT_PROVINCE = #{nowUnitProvince,jdbcType=VARCHAR},
+      NOW_UNIT_CITY = #{nowUnitCity,jdbcType=VARCHAR},
+      NOW_UNIT_ADDRESS = #{nowUnitAddress,jdbcType=VARCHAR},
+      NOW_UNIT_SCALE = #{nowUnitScale,jdbcType=SMALLINT},
+      NOW_UNIT_TEL = #{nowUnitTel,jdbcType=VARCHAR},
+      NOW_UNIT_POSTALCODE = #{nowUnitPostalcode,jdbcType=VARCHAR},
+      IS_DRIVER_LICENSE = #{isDriverLicense,jdbcType=CHAR},
+      FIRST_DRIVER_NO = #{firstDriverNo,jdbcType=VARCHAR},
+      DRIVER_NAME = #{driverName,jdbcType=VARCHAR},
+      DRIVER_NO = #{driverNo,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      RELATION_E_CONTACT = #{relationEContact,jdbcType=VARCHAR},
+      E_CONTACT_MOBILE = #{eContactMobile,jdbcType=VARCHAR},
+      E_CONTACT = #{eContact,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=CHAR},
+      REMAKES = #{remakes,jdbcType=VARCHAR},
+      IS_ASSURE = #{isAssure,jdbcType=VARCHAR},
+      HOUSE_OWNER = #{houseOwner,jdbcType=VARCHAR},
+      RELATION_D_FL = #{relationDFl,jdbcType=VARCHAR},
+      CREDIT_RECORDS = #{creditRecords,jdbcType=VARCHAR},
+      MOBILES = #{mobiles,jdbcType=VARCHAR},
+      RELATION_E_CONTACTS = #{relationEContacts,jdbcType=VARCHAR},
+      E_CONTACTS_MOBILE = #{eContactsMobile,jdbcType=VARCHAR},
+      E_CONTACTS = #{eContacts,jdbcType=VARCHAR},
+      IS_JXL_REPORT = #{isJxlReport,jdbcType=VARCHAR},
+      driver_type = #{driverType,jdbcType=VARCHAR},
+      now_work_year = #{nowWorkYear,jdbcType=VARCHAR},
+      BANK_CARD_TYPE = #{bankCardType,jdbcType=VARCHAR},
+      BANK_CARD_NO = #{bankCardNo,jdbcType=VARCHAR},
+      IS_PRINT_BOOK = #{isPrintBook,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      MARKETER_CODE = #{marketerCode,jdbcType=VARCHAR},
+      CARD_PRODUCT_CODE = #{cardProductCode,jdbcType=VARCHAR},
+      CARD_PRODUCT_NAME = #{cardProductName,jdbcType=VARCHAR},
+      CITY_CODE_STR = #{cityCodeStr,jdbcType=VARCHAR},
+      COURT = #{court,jdbcType=VARCHAR},
+      period_of_validity = #{periodOfValidity,jdbcType=VARCHAR},
+      IS_CERT_ALL = #{isCertAll,jdbcType=CHAR},
+      IS_SCENE = #{isScene,jdbcType=CHAR},
+      reference_code = #{referenceCode,jdbcType=VARCHAR},
+      reference_jgcode = #{referenceJgcode,jdbcType=VARCHAR},
+      applicationagreementbarcode = #{applicationagreementbarcode,jdbcType=VARCHAR},
+      residence_nature = #{residenceNature,jdbcType=VARCHAR},
+      now_district_code = #{nowDistrictCode,jdbcType=VARCHAR},
+      now_unit_district_code = #{nowUnitDistrictCode,jdbcType=VARCHAR},
+      now_unit_district = #{nowUnitDistrict,jdbcType=VARCHAR},
+      id_card_valid_start_date = #{idCardValidStartDate,jdbcType=DATE},
+      id_card_valid_end_date = #{idCardValidEndDate,jdbcType=DATE},
+      PROVINCE_CODE = #{provinceCode,jdbcType=VARCHAR},
+      CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      DISTRICT_CODE = #{districtCode,jdbcType=VARCHAR},
+      NOW_PROVINCE_CODE = #{nowProvinceCode,jdbcType=VARCHAR},
+      NOW_CITY_CODE = #{nowCityCode,jdbcType=VARCHAR},
+      now_unit_province_code = #{nowUnitProvinceCode,jdbcType=VARCHAR},
+      now_unit_city_code = #{nowUnitCityCode,jdbcType=VARCHAR}
+    where PROPPSER_ID = #{proppserId,jdbcType=INTEGER}
+  </update>
+
+  <select id="listByProppserIds" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from ca_proppser_info
+    where PROPPSER_ID in <foreach item="id" collection="proppserIds" open="(" separator="," close=")">#{id}</foreach>
+  </select>
+
+  <!-- 根据查询条件查找订单和主贷人信息 -->
+  <select id="listByForm" resultType="com.mljr.gps.vo.GpsQueryListVo" parameterType="com.mljr.gps.form.GpsQueryListForm">
+    SELECT
+    a.app_code AS appCode,
+    a.PROPPSER_ID AS proppserId,
+    b.PROPPSER_NAME AS customerName
+    FROM ca_app_info a,
+         ca_proppser_info b
+    WHERE a.PROPPSER_ID = b.PROPPSER_ID
+    <if test="appCode != null and appCode !=''">
+      and a.APP_CODE = #{appCode}
+    </if>
+    <if test="customerName != null and customerName !=''">
+      and b.PROPPSER_NAME = #{customerName}
+    </if>
+    <if test="excludeStatusScope != null and excludeStatusScope.size > 0">
+      and a.status not in
+      <foreach collection="excludeStatusScope" item="item" index="index" open="(" close=")" separator=",">
+        #{item}
+      </foreach>
+    </if>
+    <if test="proppserIds != null and proppserIds.size > 0">
+      and a.PROPPSER_ID in
+      <foreach collection="proppserIds" item="item" index="index" open="(" close=")" separator=",">
+        #{item}
+      </foreach>
+    </if>
+  </select>
+</mapper>

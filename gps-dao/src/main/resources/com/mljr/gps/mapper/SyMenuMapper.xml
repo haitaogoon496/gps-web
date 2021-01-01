@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mljr.gps.mapper.SyMenuMapper">
+  <resultMap id="BaseResultMap" type="com.mljr.gps.entity.SyMenu">
+    <id column="MENU_ID" jdbcType="INTEGER" property="menuId" />
+    <result column="MENU_TITLE" jdbcType="VARCHAR" property="menuTitle" />
+    <result column="MENU_INDEX" jdbcType="BIGINT" property="menuIndex" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    MENU_ID, MENU_TITLE, MENU_INDEX
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sy_menu
+    where MENU_ID = #{menuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sy_menu
+    where MENU_ID = #{menuId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mljr.gps.entity.SyMenu">
+    insert into sy_menu (MENU_ID, MENU_TITLE, MENU_INDEX
+      )
+    values (#{menuId,jdbcType=INTEGER}, #{menuTitle,jdbcType=VARCHAR}, #{menuIndex,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mljr.gps.entity.SyMenu">
+    insert into sy_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        MENU_ID,
+      </if>
+      <if test="menuTitle != null">
+        MENU_TITLE,
+      </if>
+      <if test="menuIndex != null">
+        MENU_INDEX,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        #{menuId,jdbcType=INTEGER},
+      </if>
+      <if test="menuTitle != null">
+        #{menuTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIndex != null">
+        #{menuIndex,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mljr.gps.entity.SyMenu">
+    update sy_menu
+    <set>
+      <if test="menuTitle != null">
+        MENU_TITLE = #{menuTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIndex != null">
+        MENU_INDEX = #{menuIndex,jdbcType=BIGINT},
+      </if>
+    </set>
+    where MENU_ID = #{menuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mljr.gps.entity.SyMenu">
+    update sy_menu
+    set MENU_TITLE = #{menuTitle,jdbcType=VARCHAR},
+      MENU_INDEX = #{menuIndex,jdbcType=BIGINT}
+    where MENU_ID = #{menuId,jdbcType=INTEGER}
+  </update>
+</mapper>

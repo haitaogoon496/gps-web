@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mljr.gps.mapper.GpsHistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.mljr.gps.entity.GpsHistory" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="app_code" property="appCode" jdbcType="VARCHAR" />
+    <result column="submit_time" property="submitTime" jdbcType="TIMESTAMP" />
+    <result column="submit_user_id" property="submitUserId" jdbcType="INTEGER" />
+    <result column="submit_user_name" property="submitUserName" jdbcType="VARCHAR" />
+    <result column="approval_time" property="approvalTime" jdbcType="TIMESTAMP" />
+    <result column="approval_user_id" property="approvalUserId" jdbcType="INTEGER" />
+    <result column="approval_user_name" property="approvalUserName" jdbcType="VARCHAR" />
+    <result column="approval_idea" property="approvalIdea" jdbcType="VARCHAR" />
+    <result column="install_status" property="installStatus" jdbcType="TINYINT" />
+    <result column="approval_status" property="approvalStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, app_code, submit_time, submit_user_id, submit_user_name, approval_time, approval_user_id, 
+    approval_user_name, approval_idea, install_status, approval_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ca_gps_history
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ca_gps_history
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mljr.gps.entity.GpsHistory" useGeneratedKeys="true" keyProperty="id">
+    insert into ca_gps_history (id, app_code, submit_time, 
+      submit_user_id, submit_user_name, approval_time, 
+      approval_user_id, approval_user_name, approval_idea, 
+      install_status, approval_status)
+    values (#{id,jdbcType=INTEGER}, #{appCode,jdbcType=VARCHAR}, #{submitTime,jdbcType=TIMESTAMP}, 
+      #{submitUserId,jdbcType=INTEGER}, #{submitUserName,jdbcType=VARCHAR}, #{approvalTime,jdbcType=TIMESTAMP}, 
+      #{approvalUserId,jdbcType=INTEGER}, #{approvalUserName,jdbcType=VARCHAR}, #{approvalIdea,jdbcType=VARCHAR}, 
+      #{installStatus,jdbcType=TINYINT}, #{approvalStatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mljr.gps.entity.GpsHistory" >
+    insert into ca_gps_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="appCode != null" >
+        app_code,
+      </if>
+      <if test="submitTime != null" >
+        submit_time,
+      </if>
+      <if test="submitUserId != null" >
+        submit_user_id,
+      </if>
+      <if test="submitUserName != null" >
+        submit_user_name,
+      </if>
+      <if test="approvalTime != null" >
+        approval_time,
+      </if>
+      <if test="approvalUserId != null" >
+        approval_user_id,
+      </if>
+      <if test="approvalUserName != null" >
+        approval_user_name,
+      </if>
+      <if test="approvalIdea != null" >
+        approval_idea,
+      </if>
+      <if test="installStatus != null" >
+        install_status,
+      </if>
+      <if test="approvalStatus != null" >
+        approval_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="appCode != null" >
+        #{appCode,jdbcType=VARCHAR},
+      </if>
+      <if test="submitTime != null" >
+        #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitUserId != null" >
+        #{submitUserId,jdbcType=INTEGER},
+      </if>
+      <if test="submitUserName != null" >
+        #{submitUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalTime != null" >
+        #{approvalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approvalUserId != null" >
+        #{approvalUserId,jdbcType=INTEGER},
+      </if>
+      <if test="approvalUserName != null" >
+        #{approvalUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalIdea != null" >
+        #{approvalIdea,jdbcType=VARCHAR},
+      </if>
+      <if test="installStatus != null" >
+        #{installStatus,jdbcType=TINYINT},
+      </if>
+      <if test="approvalStatus != null" >
+        #{approvalStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mljr.gps.entity.GpsHistory" >
+    update ca_gps_history
+    <set >
+      <if test="appCode != null" >
+        app_code = #{appCode,jdbcType=VARCHAR},
+      </if>
+      <if test="submitTime != null" >
+        submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitUserId != null" >
+        submit_user_id = #{submitUserId,jdbcType=INTEGER},
+      </if>
+      <if test="submitUserName != null" >
+        submit_user_name = #{submitUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalTime != null" >
+        approval_time = #{approvalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approvalUserId != null" >
+        approval_user_id = #{approvalUserId,jdbcType=INTEGER},
+      </if>
+      <if test="approvalUserName != null" >
+        approval_user_name = #{approvalUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalIdea != null" >
+        approval_idea = #{approvalIdea,jdbcType=VARCHAR},
+      </if>
+      <if test="installStatus != null" >
+        install_status = #{installStatus,jdbcType=TINYINT},
+      </if>
+      <if test="approvalStatus != null" >
+        approval_status = #{approvalStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mljr.gps.entity.GpsHistory" >
+    update ca_gps_history
+    set app_code = #{appCode,jdbcType=VARCHAR},
+      submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      submit_user_id = #{submitUserId,jdbcType=INTEGER},
+      submit_user_name = #{submitUserName,jdbcType=VARCHAR},
+      approval_time = #{approvalTime,jdbcType=TIMESTAMP},
+      approval_user_id = #{approvalUserId,jdbcType=INTEGER},
+      approval_user_name = #{approvalUserName,jdbcType=VARCHAR},
+      approval_idea = #{approvalIdea,jdbcType=VARCHAR},
+      install_status = #{installStatus,jdbcType=TINYINT},
+      approval_status = #{approvalStatus,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="queryList" parameterType="com.mljr.gps.form.GpsHistoryForm" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from ca_gps_history
+    <where>
+      <if test="appCode != null">
+        app_code = #{appCode}
+      </if>
+      <if test="approvalStatus != null">
+        and approval_status = #{approvalStatus}
+      </if>
+    </where>
+  </select>
+
+  <!-- 查询未审批的历史记录 -->
+  <select id="queryRecordNoApprove" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from ca_gps_history where app_code = #{appCode} and approval_status = 0
+  </select>
+</mapper>

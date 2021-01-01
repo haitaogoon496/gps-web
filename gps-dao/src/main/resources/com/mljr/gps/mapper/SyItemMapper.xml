@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mljr.gps.mapper.SyItemMapper" >
+  <resultMap id="BaseResultMap" type="com.mljr.gps.entity.SyItem" >
+    <id column="ITEM_ID" property="itemId" jdbcType="INTEGER" />
+    <result column="ITEM_TITLE" property="itemTitle" jdbcType="VARCHAR" />
+    <result column="ITEM_LOCATION" property="itemLocation" jdbcType="VARCHAR" />
+    <result column="MENU_ID" property="menuId" jdbcType="VARCHAR" />
+    <result column="WND_WIDTH" property="wndWidth" jdbcType="BIGINT" />
+    <result column="WND_HEIGHT" property="wndHeight" jdbcType="BIGINT" />
+    <result column="ITEM_ICON" property="itemIcon" jdbcType="VARCHAR" />
+    <result column="item_desc" property="itemDesc" jdbcType="VARCHAR" />
+    <result column="system_id" property="systemId" jdbcType="INTEGER" />
+    <result column="STATUS" property="status" jdbcType="TINYINT" />
+    <result column="MENU_TITLE" property="menuTitle" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ITEM_ID, ITEM_TITLE, ITEM_LOCATION, MENU_ID, WND_WIDTH, WND_HEIGHT, ITEM_ICON, item_desc, 
+    system_id, STATUS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sy_item
+    where ITEM_ID = #{itemId,jdbcType=INTEGER}
+  </select>
+
+
+
+  <select id="selectMenuItemByRoles" resultMap="BaseResultMap" parameterType="java.util.List" >
+    select
+    s.MENU_TITLE,
+    i.ITEM_ID,
+    i.ITEM_TITLE,
+    i.ITEM_LOCATION,
+    i.ITEM_ICON,
+    i.`STATUS`
+    from sy_menu s join sy_item i on s.MENU_ID = i.MENU_ID join sy_role_item r on i.ITEM_ID = r.ITEM_ID and i.system_id=1
+    where r.role_id in
+    <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+    group by  i.ITEM_ID  order by i.ITEM_ID asc
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sy_item
+    where ITEM_ID = #{itemId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mljr.gps.entity.SyItem" >
+    insert into sy_item (ITEM_ID, ITEM_TITLE, ITEM_LOCATION, 
+      MENU_ID, WND_WIDTH, WND_HEIGHT, 
+      ITEM_ICON, item_desc, system_id, 
+      STATUS)
+    values (#{itemId,jdbcType=INTEGER}, #{itemTitle,jdbcType=VARCHAR}, #{itemLocation,jdbcType=VARCHAR}, 
+      #{menuId,jdbcType=VARCHAR}, #{wndWidth,jdbcType=BIGINT}, #{wndHeight,jdbcType=BIGINT}, 
+      #{itemIcon,jdbcType=VARCHAR}, #{itemDesc,jdbcType=VARCHAR}, #{systemId,jdbcType=INTEGER}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mljr.gps.entity.SyItem" >
+    insert into sy_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="itemId != null" >
+        ITEM_ID,
+      </if>
+      <if test="itemTitle != null" >
+        ITEM_TITLE,
+      </if>
+      <if test="itemLocation != null" >
+        ITEM_LOCATION,
+      </if>
+      <if test="menuId != null" >
+        MENU_ID,
+      </if>
+      <if test="wndWidth != null" >
+        WND_WIDTH,
+      </if>
+      <if test="wndHeight != null" >
+        WND_HEIGHT,
+      </if>
+      <if test="itemIcon != null" >
+        ITEM_ICON,
+      </if>
+      <if test="itemDesc != null" >
+        item_desc,
+      </if>
+      <if test="systemId != null" >
+        system_id,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="itemId != null" >
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="itemTitle != null" >
+        #{itemTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="itemLocation != null" >
+        #{itemLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="menuId != null" >
+        #{menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="wndWidth != null" >
+        #{wndWidth,jdbcType=BIGINT},
+      </if>
+      <if test="wndHeight != null" >
+        #{wndHeight,jdbcType=BIGINT},
+      </if>
+      <if test="itemIcon != null" >
+        #{itemIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="itemDesc != null" >
+        #{itemDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="systemId != null" >
+        #{systemId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mljr.gps.entity.SyItem" >
+    update sy_item
+    <set >
+      <if test="itemTitle != null" >
+        ITEM_TITLE = #{itemTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="itemLocation != null" >
+        ITEM_LOCATION = #{itemLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="menuId != null" >
+        MENU_ID = #{menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="wndWidth != null" >
+        WND_WIDTH = #{wndWidth,jdbcType=BIGINT},
+      </if>
+      <if test="wndHeight != null" >
+        WND_HEIGHT = #{wndHeight,jdbcType=BIGINT},
+      </if>
+      <if test="itemIcon != null" >
+        ITEM_ICON = #{itemIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="itemDesc != null" >
+        item_desc = #{itemDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="systemId != null" >
+        system_id = #{systemId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where ITEM_ID = #{itemId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mljr.gps.entity.SyItem" >
+    update sy_item
+    set ITEM_TITLE = #{itemTitle,jdbcType=VARCHAR},
+      ITEM_LOCATION = #{itemLocation,jdbcType=VARCHAR},
+      MENU_ID = #{menuId,jdbcType=VARCHAR},
+      WND_WIDTH = #{wndWidth,jdbcType=BIGINT},
+      WND_HEIGHT = #{wndHeight,jdbcType=BIGINT},
+      ITEM_ICON = #{itemIcon,jdbcType=VARCHAR},
+      item_desc = #{itemDesc,jdbcType=VARCHAR},
+      system_id = #{systemId,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=TINYINT}
+    where ITEM_ID = #{itemId,jdbcType=INTEGER}
+  </update>
+</mapper>

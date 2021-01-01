@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mljr.gps.mapper.SyUserMapper" >
+  <resultMap id="BaseResultMap" type="com.mljr.gps.entity.SyUser" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="true_name" property="trueName" jdbcType="VARCHAR" />
+    <result column="card_type" property="cardType" jdbcType="SMALLINT" />
+    <result column="card_id" property="cardId" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="CHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="postal_code" property="postalCode" jdbcType="VARCHAR" />
+    <result column="head" property="head" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_time" property="lastTime" jdbcType="TIMESTAMP" />
+    <result column="login_times" property="loginTimes" jdbcType="INTEGER" />
+    <result column="user_status" property="userStatus" jdbcType="CHAR" />
+    <result column="user_type" property="userType" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, user_name, true_name, card_type, card_id, password, birthday, sex, province, 
+    city, email, phone, address, postal_code, head, create_time, last_time, login_times, 
+    user_status, user_type
+  </sql>
+
+
+  <sql id="queryCondition">
+    <where>
+      <if test="form != null " >
+        <if test="form.userName != null">
+          and user_name=#{form.userName}
+        </if>
+        <if test="form.trueName != null">
+          and true_name=#{form.trueName}
+        </if>
+      </if>
+    </where>
+  </sql>
+
+  <sql id="queryWhere">
+    <where>
+      <if test="userName != null">
+        and user_name=#{userName}
+      </if>
+      <if test="trueName != null">
+        and true_name like concat('%',#{trueName},'%')
+      </if>
+      <if test="userId != null and userId != ''">
+        and user_id = #{userId}
+      </if>
+    </where>
+  </sql>
+
+  <select id="pageQuery" resultMap="BaseResultMap" parameterType="com.lyqc.base.page.PageForm">
+    select
+    <include refid="Base_Column_List" />
+    from sy_user
+    <include refid="queryCondition"/>
+    limit #{limit} offset #{start}
+  </select>
+
+  <select id="queryUsersByUserRoleForm" resultMap="BaseResultMap"  parameterType="com.mljr.gps.form.SyUserRoleForm">
+    select
+    u.user_id,
+    u.user_name,
+    u.true_name
+    from sy_user u join sy_user_role us on u.user_id = us.user_id
+    <where>
+      <if test="userId != null">
+        and us.user_id=#{userId}
+      </if>
+      <if test="roleId != null">
+        and us.role_id=#{roleId}
+      </if>
+    </where>
+  </select>
+
+  <select id="queryCount" resultType="int" parameterType="com.lyqc.base.page.PageForm">
+    select COUNT(1) from sy_user <include refid="queryCondition"/>
+  </select>
+
+  <select id="queryList" resultMap="BaseResultMap" parameterType="com.mljr.gps.form.SyUserForm">
+    select
+    <include refid="Base_Column_List" />
+    from sy_user
+    <include refid="queryWhere"/>
+  </select>
+
+  <select id="queryByUsername" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from sy_user
+    where user_name=#{userName}
+  </select>
+
+  <select id="queryByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from sy_user
+    where user_id=#{userId}
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sy_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sy_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mljr.gps.entity.SyUser" >
+    insert into sy_user (user_id, user_name, true_name, 
+      card_type, card_id, password, 
+      birthday, sex, province, 
+      city, email, phone, 
+      address, postal_code, head, 
+      create_time, last_time, login_times, 
+      user_status, user_type)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{trueName,jdbcType=VARCHAR}, 
+      #{cardType,jdbcType=SMALLINT}, #{cardId,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{postalCode,jdbcType=VARCHAR}, #{head,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastTime,jdbcType=TIMESTAMP}, #{loginTimes,jdbcType=INTEGER}, 
+      #{userStatus,jdbcType=CHAR}, #{userType,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mljr.gps.entity.SyUser" >
+    insert into sy_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="trueName != null" >
+        true_name,
+      </if>
+      <if test="cardType != null" >
+        card_type,
+      </if>
+      <if test="cardId != null" >
+        card_id,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="postalCode != null" >
+        postal_code,
+      </if>
+      <if test="head != null" >
+        head,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lastTime != null" >
+        last_time,
+      </if>
+      <if test="loginTimes != null" >
+        login_times,
+      </if>
+      <if test="userStatus != null" >
+        user_status,
+      </if>
+      <if test="userType != null" >
+        user_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="trueName != null" >
+        #{trueName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null" >
+        #{cardType,jdbcType=SMALLINT},
+      </if>
+      <if test="cardId != null" >
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postalCode != null" >
+        #{postalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="head != null" >
+        #{head,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastTime != null" >
+        #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginTimes != null" >
+        #{loginTimes,jdbcType=INTEGER},
+      </if>
+      <if test="userStatus != null" >
+        #{userStatus,jdbcType=CHAR},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mljr.gps.entity.SyUser" >
+    update sy_user
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="trueName != null" >
+        true_name = #{trueName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null" >
+        card_type = #{cardType,jdbcType=SMALLINT},
+      </if>
+      <if test="cardId != null" >
+        card_id = #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postalCode != null" >
+        postal_code = #{postalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="head != null" >
+        head = #{head,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastTime != null" >
+        last_time = #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginTimes != null" >
+        login_times = #{loginTimes,jdbcType=INTEGER},
+      </if>
+      <if test="userStatus != null" >
+        user_status = #{userStatus,jdbcType=CHAR},
+      </if>
+      <if test="userType != null" >
+        user_type = #{userType,jdbcType=CHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mljr.gps.entity.SyUser" >
+    update sy_user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      true_name = #{trueName,jdbcType=VARCHAR},
+      card_type = #{cardType,jdbcType=SMALLINT},
+      card_id = #{cardId,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      postal_code = #{postalCode,jdbcType=VARCHAR},
+      head = #{head,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_time = #{lastTime,jdbcType=TIMESTAMP},
+      login_times = #{loginTimes,jdbcType=INTEGER},
+      user_status = #{userStatus,jdbcType=CHAR},
+      user_type = #{userType,jdbcType=CHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+
+  <select id="listApprovalUserList"  resultType="com.mljr.gps.entity.SyUser" >
+    select
+    u.user_id AS userId,
+    u.true_name AS  trueName,
+    u.user_name AS userName,
+    s.role_name as roleName
+    from sy_user u, sy_user_role r,sy_role s
+    WHERE u.user_id = r.user_id AND r.role_id = s.role_id and s.role_name = 'GPS审批管理'
+  </select>
+
+  <select id="getDealerCodeScopeByUserId"  resultType="java.lang.Integer" parameterType="java.lang.Integer">
+    select  dealer_code
+    from  sy_user_dealer WHERE user_id = #{userId,jdbcType=INTEGER}
+  </select>
+
+</mapper>

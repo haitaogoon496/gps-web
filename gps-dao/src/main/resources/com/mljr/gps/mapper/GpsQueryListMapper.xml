@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mljr.gps.mapper.GpsQueryListMapper">
+  <sql id="pageQueryWhere">
+    <where>
+      <if test="form != null">
+          <if test="form.excludeStatusScope != null and form.excludeStatusScope.size > 0">
+              and a.status not in
+              <foreach collection="form.excludeStatusScope" item="item" index="index" open="(" close=")" separator=",">
+                  #{item}
+              </foreach>
+          </if>
+          <if test="form.manualAuditCode != null and form.manualAuditCode !=''">
+            and a.app_code IN (SELECT app_code FROM Ca_Car_Gps WHERE del_status = 1 and FIND_IN_SET (#{form.manualAuditCode},replace(manual_audit_code,';',',')) GROUP BY app_code)
+          </if>
+          <if test="form.customerName != null and form.customerName !=''">
+            and b.PROPPSER_NAME = #{form.customerName}
+          </if>
+          <if test="form.dealerCodeScope != null and form.dealerCodeScope.size > 0">
+            and d.dealer_code in
+              <foreach collection="form.dealerCodeScope" item="item" index="index" open="(" close=")" separator=",">
+                  #{item}
+              </foreach>
+          </if>
+          <if test="form.dealerName != null and form.dealerName !=''">
+              and d.DEALER_NAME = #{form.dealerName}
+          </if>
+          <if test="form.companyName != null and form.companyName !=''">
+            and dc.COMPANY_NAME = #{form.companyName}
+          </if>
+          <if test="form.appCode != null and form.appCode !=''">
+            and a.APP_CODE = #{form.appCode}
+          </if>
+          <if test="form.approvalUserId != null and form.approvalUserId !=''">
+            and f.approval_user_id = #{form.approvalUserId}
+          </if>
+          <if test="form.appTime != null and form.appTime !=''">
+              <![CDATA[ and a.app_time >= #{form.appTime}  ]]>
+          </if>
+          <if test="form.isGps != null and form.isGps !=''">
+            and a.is_gps = #{form.isGps}
+          </if>
+          <if test="form.isGpsScope != null and form.isGpsScope.size > 0">
+              and a.is_gps in
+              <foreach collection="form.isGpsScope" item="item" index="index" open="(" close=")" separator=",">
+                  #{item}
+              </foreach>
+          </if>
+          <if test="form.beginTime != null and form.beginTime !=''">
+              <![CDATA[ and a.update_time >= #{form.beginTime}  ]]>
+          </if>
+          <if test="form.endTime != null and form.endTime !=''">
+              <![CDATA[ and a.update_time <= #{form.endTime}  ]]>
+          </if>
+
+          <if test="form.saleName != null and form.saleName !=''">
+              and s.sale_name = #{form.saleName}
+          </if>
+          <if test="form.operationName != null and form.operationName !=''">
+              and o.OPERATION_NAME = #{form.operationName}
+          </if>
+          and a.manage_Approval_Time is not null
+      </if>
+    </where>
+  </sql>
+
+    <!-- 我的领单 安装单已上传 查询条件 -->
+    <sql id="pageQueryWhereInstalledGps">
+        <where>
+            <if test="form != null">
+                <if test="form.excludeStatusScope != null and form.excludeStatusScope.size > 0">
+                    and a.status not in
+                    <foreach collection="form.excludeStatusScope" item="item" index="index" open="(" close=")" separator=",">
+                        #{item}
+                    </foreach>
+                </if>
+                <if test="form.appCode != null and form.appCode !=''">
+                    and a.APP_CODE = #{form.appCode}
+                </if>
+                <if test="form.approvalUserId != null and form.approvalUserId !=''">
+                    and f.approval_user_id = #{form.approvalUserId}
+                </if>
+                <if test="form.isGps != null and form.isGps !=''">
+                    and a.is_gps = #{form.isGps}
+                </if>
+                <if test="form.dealerCodeScope != null and form.dealerCodeScope.size > 0">
+                    and a.dealer_code in
+                    <foreach collection="form.dealerCodeScope" item="item" index="index" open="(" close=")" separator=",">
+                        #{item}
+                    </foreach>
+                </if>
+                <if test="form.dealerName != null and form.dealerName !=''">
+                    and a.DEALER_NAME = #{form.dealerName}
+                </if>
+                <if test="form.companyName != null and form.companyName !=''">
+                    and a.COMPANY_NAME = #{form.companyName}
+                </if>
+                <if test="form.appCodeList != null and form.appCodeList.size > 0">
+                    and a.app_code in
+                    <foreach collection="form.appCodeList" item="item" index="index" open="(" close=")" separator=",">
+                        #{item}
+                    </foreach>
+                </if>
+                <if test="form.appTime != null and form.appTime !=''">
+                    <![CDATA[ and a.app_time >= #{form.appTime}  ]]>
+                </if>
+                <if test="form.beginTime != null and form.beginTime !=''">
+                    <![CDATA[ and a.update_time >= #{form.beginTime}  ]]>
+                </if>
+                <if test="form.endTime != null and form.endTime !=''">
+                    <![CDATA[ and a.update_time <= #{form.endTime}  ]]>
+                </if>
+                AND  a.R_GPS_FEE > 0
+                and a.manage_Approval_Time is not null
+            </if>
+        </where>
+    </sql>
+
+    <!-- 车贷申请管理-待上传GPS安装单-->
+    <select id="queryListForTobeUploadOnApply" resultType="com.mljr.gps.vo.GpsQueryListVo" parameterType="com.lyqc.base.page.PageForm">
+        SELECT
+            a.APP_CODE as appCode,
+            a.FLOW_SEQ as flowSeq,
+            a.status as appStatus,
+            a.is_gps as isGps,
+            a.is_lcv as carType,
+            b.IS_SCENE as isScene,
+            a.IS_CREDIT as isCredit,
+            a.IS_BACK as isBack,
+            a.is_quick_audit as isQuickAudit,
+            a.SEND_APPR as sendAppr,
+            a.LOAN_FILE_STATUS as loanFileStatus,
+            a.WORKFLOW_QUEUE as workflowQueue,
+            a.A_LOAN_PERIODS as loanPeriods,
+            DATE_FORMAT(a.APP_TIME,'%Y-%m-%d %H:%i:%s') as appTime,
+            DATE_FORMAT(a.UPDATE_TIME,'%Y-%m-%d %H:%i:%s') as updateTime,
+            a.r_gps_fee as gpsFee,
+            c.CAR_ID as carId,
+            c.CAR_IDENTIFY as carIdentify,
+            c.CAR_COLOR as carColor,
+            c.CAR_SERIES as carSeries,
+            b.PROPPSER_NAME as customerName,
+            d.province,
+            dc.COMPANY_NAME as companyName,
+            d.dealer_code as dealerCode,
+            d.DEALER_NAME as dealerName,
+            DATE_FORMAT(f.approval_time,'%Y-%m-%d') AS auditDate,
+            f.approval_idea as auditIdea,
+            f.approval_user_id as approvalUserId,
+            f.approval_user_name as approvalUserName,
+            p.P_NAME as productName
+        FROM ca_app_info a
+            LEFT JOIN ca_proppser_info b ON b.PROPPSER_ID = a.PROPPSER_ID
+            LEFT JOIN ca_car_info c ON a.CAR_ID = c.CAR_ID
+            LEFT JOIN sy_dealer d on d.DEALER_CODE = a.DEALER_CODE
+            LEFT JOIN sy_dealer_company dc on dc.COMPANY_CODE = d.COMPANY_CODE
+            LEFT JOIN ca_gps_flow f ON f.app_code = a.APP_CODE
+            LEFT JOIN ca_product p on p.P_ID = a.PRODUCT_CODE
+        <include refid="pageQueryWhere"/>
+        AND a.R_GPS_FEE > 0   and a.`STATUS` not in ('11','12')
+            order by a.APP_TIME desc
+        limit #{limit} offset #{start}
+    </select>
+    <!-- 车贷申请管理-待上传GPS安装单 -->
+    <select id="queryCountForTobeUploadOnApply" resultType="int" parameterType="com.lyqc.base.page.PageForm">
+        select
+        COUNT(1) from ca_app_info a
+        LEFT JOIN ca_proppser_info b ON b.PROPPSER_ID = a.PROPPSER_ID
+        LEFT JOIN ca_car_info c ON a.CAR_ID = c.CAR_ID
+        LEFT JOIN ca_gps_flow f ON f.app_code = a.APP_CODE
+        LEFT JOIN sy_dealer d on d.DEALER_CODE = a.DEALER_CODE
+        LEFT JOIN sy_dealer_company dc on dc.COMPANY_CODE = d.COMPANY_CODE
+        <include refid="pageQueryWhere"/>
+        AND a.R_GPS_FEE > 0   and a.`STATUS` not in ('11','12')
+    </select>
+
+  <!-- 车贷申请管理-GPS安装单列表-->
+  <select id="queryListForInstalledOnApply" resultType="com.mljr.gps.vo.GpsQueryListVo" parameterType="com.lyqc.base.page.PageForm">
+      SELECT
+          a.APP_CODE as appCode,
+          a.FLOW_SEQ as flowSeq,
+          a.status as appStatus,
+          a.is_gps as isGps,
+          a.PROPPSER_ID AS proppserId,
+          a.is_lcv as carType,
+          a.is_back as isBack,
+          a.LOAN_FILE_STATUS as loanFileStatus,
+          a.WORKFLOW_QUEUE as workflowQueue,
+          a.A_LOAN_PERIODS as loanPeriods,
+          DATE_FORMAT(a.APP_TIME,'%Y-%m-%d %H:%i:%s') as appTime,
+          DATE_FORMAT(a.UPDATE_TIME,'%Y-%m-%d %H:%i:%s') as updateTime,
+          c.CAR_ID as carId,
+          c.CAR_IDENTIFY as carIdentify,
+          c.CAR_COLOR as carColor,
+          c.CAR_SERIES as carSeries,
+          c.GPS_COUNT as gpsCount,
+          a.r_gps_fee as gpsFee,
+          a.COMPANY_NAME as companyName,
+          a.dealer_code as dealerCode,
+          a.DEALER_NAME as dealerName,
+          DATE_FORMAT(f.approval_time,'%Y-%m-%d') AS auditDate,
+          f.approval_idea as auditIdea,
+          f.approval_user_id as approvalUserId,
+          f.approval_user_name as approvalUserName,
+          f.remark as flowRemark
+      FROM ca_app_info a
+      LEFT JOIN ca_gps_flow f ON f.app_code = a.APP_CODE
+      LEFT JOIN ca_car_info c ON a.car_id = c.car_id
+      <include refid="pageQueryWhereInstalledGps"/>
+      and a.`STATUS` in ('15','16','17','18','19','25','26','27','28','29','32')
+      order by a.APP_TIME desc
+      limit #{limit} offset #{start}
+  </select>
+   <!--车贷申请管理-GPS安装单列表-->
+  <select id="queryCountForInstalledOnApply" resultType="int" parameterType="com.lyqc.base.page.PageForm">
+    select
+      COUNT(1) from ca_app_info a
+        LEFT JOIN ca_gps_flow f ON f.app_code = a.APP_CODE
+      <include refid="pageQueryWhereInstalledGps"/>
+      and a.`STATUS` in ('15','16','17','18','19','25','26','27','28','29','32')
+  </select>
+
+
+
+    <!-- 车贷审批管理-GPS审核领单 -->
+    <select id="queryListForGpsApprovePull" resultType="com.mljr.gps.vo.GpsQueryListVo" parameterType="com.lyqc.base.page.PageForm">
+        SELECT
+            a.APP_CODE as appCode,
+            a.FLOW_SEQ as flowSeq,
+            a.status as appStatus,
+            a.is_gps as isGps,
+            a.is_lcv as carType,
+            b.IS_SCENE as isScene,
+            a.IS_CREDIT as isCredit,
+            a.IS_BACK as isBack,
+            a.DEALER_CODE as dealerCode,
+            a.is_quick_audit as isQuickAudit,
+            a.SEND_APPR as sendAppr,
+            a.LOAN_FILE_STATUS as loanFileStatus,
+            a.WORKFLOW_QUEUE as workflowQueue,
+            a.A_LOAN_PERIODS as loanPeriods,
+            DATE_FORMAT(a.APP_TIME,'%Y-%m-%d %H:%i:%s') as appTime,
+            DATE_FORMAT(f.submit_time,'%Y-%m-%d %H:%i:%s') as updateTime,
+            a.r_gps_fee as gpsFee,
+            b.PROPPSER_NAME as customerName,
+            DATE_FORMAT(f.approval_time,'%Y-%m-%d') AS auditDate,
+            f.approval_idea as auditIdea,
+            f.approval_user_id as approvalUserId,
+            f.approval_user_name as approvalUserName
+        FROM ca_app_info a
+            LEFT JOIN ca_proppser_info b ON b.PROPPSER_ID = a.PROPPSER_ID
+            LEFT JOIN ca_gps_flow f ON f.app_code = a.APP_CODE
+            <include refid="pageQueryWhere"/>
+            and f.approval_user_id is null
+            and a.R_GPS_FEE > 0
+        order by f.submit_time ASC
+        limit #{limit} offset #{start}
+    </select>
+
+    <!-- 车贷审批管理-GPS审核领单 -->
+    <select id="queryCountForGpsApprovePull" resultType="int" parameterType="com.lyqc.base.page.PageForm">
+        select
+        COUNT(1) from ca_app_info a
+        LEFT JOIN ca_proppser_info b ON b.PROPPSER_ID = a.PROPPSER_ID
+        LEFT JOIN ca_gps_flow f ON f.app_code = a.APP_CODE
+        <include refid="pageQueryWhere"/>
+        and f.approval_user_id is null
+        AND a.is_Gps ='2'
+        and a.R_GPS_FEE > 0
+
+    </select>
+
+
+    <!-- 车贷审批管理-我的GPS领单列表查询 GPS安装单已上传 GPS安装列表-->
+    <select id="queryListForInstalledGps" resultType="com.mljr.gps.vo.GpsQueryListVo" parameterType="com.lyqc.base.page.PageForm">
+        SELECT
+        a.APP_CODE as appCode,
+        a.PROPPSER_ID as proppserId,
+        a.DEALER_CODE as dealerCode,
+        a.DEALER_NAME as dealerName,
+        a.FLOW_SEQ as flowSeq,
+        a.status as appStatus,
+        a.IS_GPS as isGps,
+        a.IS_LCV as carType,
+        a.IS_CREDIT as isCredit,
+        a.IS_BACK as isBack,
+        a.IS_QUICK_AUDIT as isQuickAudit,
+        a.SEND_APPR as sendAppr,
+        a.LOAN_FILE_STATUS as loanFileStatus,
+        a.WORKFLOW_QUEUE as workflowQueue,
+        a.A_LOAN_PERIODS as loanPeriods,
+        DATE_FORMAT(a.APP_TIME,'%Y-%m-%d %H:%i:%s') as appTime,
+        DATE_FORMAT(a.UPDATE_TIME,'%Y-%m-%d %H:%i:%s') as updateTime,
+        a.R_GPS_FEE as gpsFee,
+        DATE_FORMAT(f.APPROVAL_TIME,'%Y-%m-%d') AS auditDate,
+        f.APPROVAL_IDEA as auditIdea,
+        f.APPROVAL_USER_ID as approvalUserId,
+        f.APPROVAL_USER_NAME as approvalUserName,
+        f.FLOW_STEP as gpsflowStep,
+        f.FLOW_STATUS as gpsFlowStatus
+        FROM ca_app_info a
+        LEFT JOIN ca_gps_flow f ON f.app_code = a.APP_CODE
+        <include refid="pageQueryWhereInstalledGps"/>
+        limit #{limit} offset #{start}
+    </select>
+
+    <!-- 车贷审批管理-我的GPS领单 安装单已上传共用sql -->
+    <select id="queryCountForInstalledGps" resultType="int" parameterType="com.lyqc.base.page.PageForm">
+        select
+        COUNT(1) from ca_app_info a
+        LEFT JOIN ca_gps_flow f ON f.app_code = a.APP_CODE
+        <include refid="pageQueryWhereInstalledGps"/>
+    </select>
+
+    <select id="queryCountForGpsApproveMine" resultType="int" parameterType="com.lyqc.base.page.PageForm">
+        select
+        COUNT(1) from ca_app_info a
+        LEFT JOIN ca_gps_flow f ON f.app_code = a.APP_CODE
+        <include refid="pageQueryWhere"/>
+        and a.R_GPS_FEE > 0
+        AND a.is_Gps ='2'
+    </select>
+
+    <!-- 车贷审批管理-GPS安装单未上传-->
+    <select id="queryListForUnInstalledGps" resultType="com.mljr.gps.vo.GpsQueryListVo" parameterType="com.lyqc.base.page.PageForm">
+        SELECT
+            a.APP_CODE as appCode,
+            a.FLOW_SEQ as flowSeq,
+            a.status as appStatus,
+            a.is_gps as isGps,
+            a.is_lcv as carType,
+            b.IS_SCENE as isScene,
+            a.IS_CREDIT as isCredit,
+            a.IS_BACK as isBack,
+            a.is_quick_audit as isQuickAudit,
+            a.SEND_APPR as sendAppr,
+            a.LOAN_FILE_STATUS as loanFileStatus,
+            a.WORKFLOW_QUEUE as workflowQueue,
+            a.A_LOAN_PERIODS as loanPeriods,
+            DATE_FORMAT(a.APP_TIME,'%Y-%m-%d %H:%i:%s') as appTime,
+            DATE_FORMAT(a.UPDATE_TIME,'%Y-%m-%d %H:%i:%s') as updateTime,
+            a.r_gps_fee as gpsFee,
+            b.PROPPSER_NAME as customerName,
+            d.province,
+            d.dealer_code as dealerCode,
+            d.DEALER_NAME as dealerName,
+            p.P_NAME as productName
+        FROM ca_app_info a
+            JOIN ca_gps_flow f ON a.app_code = f.app_code
+            LEFT JOIN ca_proppser_info b ON b.PROPPSER_ID = a.PROPPSER_ID
+            LEFT JOIN sy_dealer d on d.DEALER_CODE = a.DEALER_CODE
+            LEFT JOIN ca_product p on p.P_ID = a.PRODUCT_CODE
+            <include refid="pageQueryWhere"/>
+            AND f.flow_status = 2 and  a.is_Gps ='0' and  a.R_GPS_FEE > 0
+        limit #{limit} offset #{start}
+    </select>
+
+    <!-- 车贷审批管理-GPS安装单未上传-查询数量 -->
+    <select id="queryCountForUnInstalledGps" resultType="int" parameterType="com.lyqc.base.page.PageForm">
+        select
+        COUNT(1) from ca_app_info a
+        JOIN ca_gps_flow f ON a.app_code = f.app_code
+        LEFT JOIN ca_proppser_info b ON b.PROPPSER_ID = a.PROPPSER_ID
+        LEFT JOIN sy_dealer d on d.DEALER_CODE = a.DEALER_CODE
+        <include refid="pageQueryWhere"/>
+        AND f.flow_status = 2 and  a.is_Gps ='0' and  a.R_GPS_FEE > 0
+    </select>
+
+    <!-- 车贷审批管理- 综合查询-->
+    <select id="queryListForGpsGeneral" resultType="com.mljr.gps.vo.GpsQueryListVo" parameterType="com.lyqc.base.page.PageForm">
+        SELECT
+            a.APP_CODE as appCode,
+            a.FLOW_SEQ as flowSeq,
+            a.status as appStatus,
+            a.is_gps as isGps,
+            a.user_name as userName,
+            a.COMPANY_NAME as companyName,
+            a.dealer_name as dealerName,
+            a.is_lcv as carType,
+            b.IS_SCENE as isScene,
+            a.IS_CREDIT as isCredit,
+            a.IS_BACK as isBack,
+            a.is_quick_audit as isQuickAudit,
+            c.CAR_SERIES as carSeries,
+            a.SEND_APPR as sendAppr,
+            a.LOAN_FILE_STATUS as loanFileStatus,
+            a.WORKFLOW_QUEUE as workflowQueue,
+            a.A_LOAN_PERIODS as loanPeriods,
+            DATE_FORMAT(a.APP_TIME,'%Y-%m-%d %H:%i:%s') as appTime,
+            DATE_FORMAT(a.UPDATE_TIME,'%Y-%m-%d %H:%i:%s') as updateTime,
+            a.r_gps_fee as gpsFee,
+            b.PROPPSER_NAME as customerName,
+            DATE_FORMAT(f.approval_time,'%Y-%m-%d') AS auditDate,
+            f.approval_idea as auditIdea,
+            f.approval_user_id as approvalUserId,
+            f.approval_user_name as approvalUserName,
+            p.P_NAME as productName
+        FROM ca_app_info a
+            LEFT JOIN ca_proppser_info b ON b.PROPPSER_ID = a.PROPPSER_ID
+            LEFT JOIN ca_car_info c ON c.CAR_ID = a.CAR_ID
+            LEFT JOIN ca_gps_flow f ON f.app_code = a.APP_CODE
+            LEFT JOIN sy_dealer s ON s.DEALER_CODE = a.DEALER_CODE
+            LEFT JOIN ca_product p on p.P_ID = a.PRODUCT_CODE
+        where 1=1
+        <include refid="whereForGeneral"/>
+        order by a.update_time desc
+        limit #{limit} offset #{start}
+    </select>
+
+    <!-- 车贷审批管理- 综合查询 -->
+    <select id="queryCountForGpsGeneral" resultType="int" parameterType="com.lyqc.base.page.PageForm">
+        select
+          COUNT(1) from ca_app_info a
+        LEFT JOIN ca_proppser_info b ON b.PROPPSER_ID = a.PROPPSER_ID
+        LEFT JOIN sy_dealer s ON s.DEALER_CODE = a.DEALER_CODE
+        where (a.PROPPSER_ID IS NOT null  or a.car_id IS NOT null)
+        <include refid="whereForGeneral"/>
+    </select>
+    <sql id="whereForGeneral">
+
+            <if test="form.customerName != null and form.customerName !=''">
+                and b.PROPPSER_NAME = #{form.customerName}
+            </if>
+            <if test="form.dealerName != null and form.dealerName !=''">
+                and s.DEALER_NAME = #{form.dealerName}
+            </if>
+            <if test="form.companyName != null and form.companyName !=''">
+                and a.COMPANY_NAME = #{form.companyName}
+            </if>
+            <if test="form.appCode != null and form.appCode !=''">
+                and a.APP_CODE = #{form.appCode}
+            </if>
+            <if test="form.appTimeStart != null and form.appTimeStart !=''">
+                <![CDATA[ and a.app_time >= #{form.appTimeStart}  ]]>
+            </if>
+            <if test="form.appTimeEnd != null and form.appTimeEnd !=''">
+                <![CDATA[ and #{form.appTimeEnd} >= a.app_time    ]]>
+            </if>
+            <if test="form.isGps != null ">
+                and a.is_gps = #{form.isGps}
+            </if>
+            <if test="form.isOld != null">
+                and a.is_old = #{form.isOld}
+            </if>
+            <if test="form.isLcv!= null ">
+                and a.is_lcv = #{form.isLcv}
+            </if>
+            <if test="form.isCompanyLicense!= null ">
+                and a.is_company_license = #{form.isCompanyLicense}
+            </if>
+            <if test="form.rateLevel!= null and form.rateLevel !=''">
+                and a.rate_level = #{form.rateLevel}
+            </if>
+            <if test="form.isVip!= null and form.isVip !=''">
+                and a.REMARKS1 = #{form.isVip}
+            </if>
+            <if test="form.userName!= null and form.userName !=''">
+                and a.user_uame = #{form.userName}
+            </if>
+            <if test="form.status!= null and form.status !=''">
+                and a.status = #{form.status}
+            </if>
+            <if test="form.idNo!= null and form.idNo !=''">
+                and a.IDNO = #{form.idNo}
+            </if>
+
+    </sql>
+
+    <!-- 风云系统-GPS安装单列表-->
+    <select id="queryListForInstalled" resultType="com.lyqc.gpsweb.vo.GpsInstalledListVo" parameterType="com.lyqc.base.page.PageForm">
+        SELECT
+        a.APP_CODE as appCode,
+        b.PROPPSER_NAME as customerName,
+        d.dealer_code as dealerCode,
+        d.DEALER_NAME as dealerName,
+        dc.COMPANY_NAME as companyName,
+        <if test="form.systemCode == '100000' ">
+            s.SALE_NAME as saleName,
+            o.OPERATION_NAME as operationName,
+        </if>
+        c.GPS_COUNT as gpsCount,
+        a.status as appStatus,
+        f.remark as flowRemark,
+        DATE_FORMAT(a.APP_TIME,'%Y-%m-%d %H:%i:%s') as appTime,
+        DATE_FORMAT(a.UPDATE_TIME,'%Y-%m-%d %H:%i:%s') as updateTime
+        FROM
+        ca_app_info a
+        LEFT JOIN ca_proppser_info b ON b.PROPPSER_ID = a.PROPPSER_ID
+        LEFT JOIN ca_car_info c ON a.CAR_ID = c.CAR_ID
+        LEFT JOIN sy_dealer d on d.DEALER_CODE = a.DEALER_CODE
+        LEFT JOIN sy_dealer_company dc on dc.COMPANY_CODE = d.COMPANY_CODE
+        LEFT JOIN ca_gps_flow f ON f.app_code = a.APP_CODE
+        <!-- ca_zy_sale这个表竟然有重复数据，比如sale_id=7244 -->
+        <if test="form.systemCode == '100000' ">
+            LEFT JOIN (select s.SALE_ID,s.SALE_NAME from ca_zy_sale s group by s.SALE_ID) s ON s.SALE_ID = a.BELONG_SALE
+            LEFT JOIN (select o.OPERATION_ID,o.OPERATION_NAME from ca_zy_operation o) o ON o.OPERATION_ID = a.BELONG_OPERATION
+        </if>
+        <include refid="pageQueryWhere"/>
+        and a.`STATUS` in ('17','25','26','29') AND a.R_GPS_FEE > 0
+        order by a.APP_TIME desc
+        limit #{limit} offset #{start}
+    </select>
+    <!-- 风云系统-GPS安装单列表 -->
+    <select id="queryCountForInstalled" resultType="int" parameterType="com.lyqc.base.page.PageForm">
+        select
+        COUNT(1) from ca_app_info a
+        LEFT JOIN ca_proppser_info b ON b.PROPPSER_ID = a.PROPPSER_ID
+        LEFT JOIN ca_car_info c ON a.CAR_ID = c.CAR_ID
+        LEFT JOIN ca_gps_flow f ON f.app_code = a.APP_CODE
+        LEFT JOIN sy_dealer d on d.DEALER_CODE = a.DEALER_CODE
+        LEFT JOIN sy_dealer_company dc on dc.COMPANY_CODE = d.COMPANY_CODE
+        <!-- ca_zy_sale这个表竟然有重复数据，比如sale_id=7244 -->
+        <if test="form.systemCode == '100000' ">
+            LEFT JOIN (select s.SALE_ID,s.SALE_NAME from ca_zy_sale s group by s.SALE_ID) s ON s.SALE_ID = a.BELONG_SALE
+            LEFT JOIN (select o.OPERATION_ID,o.OPERATION_NAME from ca_zy_operation o) o ON o.OPERATION_ID = a.BELONG_OPERATION
+        </if>
+        <include refid="pageQueryWhere"/>
+        and a.`STATUS` in ('17','25','26','29') AND a.R_GPS_FEE > 0
+    </select>
+
+</mapper>
