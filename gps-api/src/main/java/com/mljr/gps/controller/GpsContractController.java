@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  * @Author : lihaitao
  */
 @RestController
-@RequestMapping("/gpsContract")
+@RequestMapping("/gps/contract")
 @Api(description = "【GPS安装联系人】相关api",tags = "GpsContractController")
 public class GpsContractController {
 
