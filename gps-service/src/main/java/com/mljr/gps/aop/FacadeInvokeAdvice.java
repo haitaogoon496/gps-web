@@ -56,7 +56,7 @@ public class FacadeInvokeAdvice {
             }
             return ret;
         } finally {
-        	log.info("sessionUserId:{},target:{},duration:{}",userComponent.getUserId(), target, TimeTools.spend(System.currentTimeMillis() - start));
+        	log.info("target:{},duration:{}",target, TimeTools.spend(System.currentTimeMillis() - start));
         }
     }
 
